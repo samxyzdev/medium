@@ -7,8 +7,12 @@ import jwt from "jsonwebtoken";
 
 const app = express();
 
-app.get("/signup", async (req, res) => {
-  const userData = UserSchema.safeParse(req.body);
+app.use(express.json());
+const signupUserSchema = UserSchema.omit({ id: true });
+app.post("/signup", async (req, res) => {
+  console.log(req.body);
+  const userData = signupUserSchema.safeParse(req.body);
+  // console.log(userData.error);
   if (!userData.success) {
     res.json({
       msg: "Please send correct data",
@@ -32,8 +36,9 @@ app.get("/signup", async (req, res) => {
   return;
 });
 
-app.get("/signin", async (req, res) => {
-  const userData = UserSchema.safeParse(req.body);
+const signinUserSchema = UserSchema.omit({ id: true, role: true });
+app.post("/signin", async (req, res) => {
+  const userData = signinUserSchema.safeParse(req.body);
   if (!userData.success) {
     res.json({
       msg: "Please send correct data",
@@ -73,3 +78,5 @@ app.get("/signin", async (req, res) => {
 app.post("/admin/blog", authMiddleware, (req, res) => {});
 app.get("/user/:blog", (req, res) => {});
 app.get("/top10blog", (req, res) => {});
+
+app.listen(3001);
