@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const authMiddleware = (
   req: Request,
@@ -20,5 +20,6 @@ export const authMiddleware = (
     });
     return;
   }
-  req.id = decoded.id;
+  req.id = (decoded as JwtPayload).id;
+  next();
 };
