@@ -24,7 +24,6 @@ app.post("/signup", async (req, res) => {
     data: {
       username: userData.data.username,
       password: hashedPassword,
-      role: userData.data.role,
     },
   });
   console.log(process.env.JWT_SECRET);
