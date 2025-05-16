@@ -36,7 +36,7 @@ app.post("/signup", async (req, res) => {
   return;
 });
 
-const signinUserSchema = UserSchema.omit({ id: true, role: true });
+const signinUserSchema = UserSchema.omit({ id: true });
 app.post("/signin", async (req, res) => {
   const userData = signinUserSchema.safeParse(req.body);
   if (!userData.success) {
@@ -75,8 +75,93 @@ app.post("/signin", async (req, res) => {
   });
   return;
 });
-app.post("/admin/blog", authMiddleware, (req, res) => {});
-app.get("/user/:blog", (req, res) => {});
-app.get("/top10blog", (req, res) => {});
+
+const createBlogSchema = BlogSchema.omit({ id: true, autherId: true });
+app.post("/create/blog", authMiddleware, async (req, res) => {
+  const blogData = createBlogSchema.safeParse(req.body);
+  if (!blogData.success) {
+    res.json({
+      msg: "Please send correct data",
+    });
+    return;
+  }
+  const createBlog = await prisma.blog.create({
+    data: {
+      title: blogData.data.title,
+      content: blogData.data.content,
+      autherId: req.id,
+    },
+  });
+  if (!createBlog) {
+    res.json({
+      msg: "error while creating a blog",
+    });
+    return;
+  }
+  res.json({
+    msg: "Blog created Successfully",
+  });
+  return;
+});
+
+app.put("/user/edit/:blog", authMiddleware, async (req, res) => {
+  const findBlog = await prisma.blog.findFirst({
+    where: {
+      id: req.id,
+    },
+  });
+  if (!findBlog) {
+    res.json({
+      msg: "You are not owner of this blog",
+    });
+    return;
+  }
+  const updateBlog = await prisma.blog.update({
+    where: {
+      id: req.id,
+    },
+    data: {
+      title: req.body.title,
+      content: req.body.content,
+    },
+  });
+  if (!updateBlog) {
+    res.json({
+      msg: "Error while creating a blog",
+    });
+    return;
+  }
+  res.json({
+    msg: "Blog updated successfully",
+  });
+  return;
+});
+
+app.get("/top10blog", async (req, res) => {
+  const top10LatestBlog = await prisma.blog.findMany({ take: 10 });
+  res.json({
+    top10LatestBlog,
+  });
+  return;
+});
+
+app.get(":blogId", async (req, res) => {
+  const blogId = req.params.blogId;
+  const blog = await prisma.blog.findFirst({
+    where: {
+      id: blogId,
+    },
+  });
+  if (!blog) {
+    res.json({
+      msg: "Blog not found",
+    });
+    return;
+  }
+  res.json({
+    blog,
+  });
+  return;
+});
 
 app.listen(3001);
