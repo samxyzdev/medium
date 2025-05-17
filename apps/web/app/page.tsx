@@ -27,7 +27,7 @@ export default function Home() {
 
 function BlogCard() {
   return (
-    <div className="border-b pb-6 border-gray-200 ">
+    <div className="border-b pb-6 border-gray-200 md:max-w-xl">
       <div className="flex items-center pt-10">
         <ProfileSvg />
         <div className="text-sm pl-1">Rico Fritzsche</div>
@@ -207,13 +207,20 @@ function TopBar() {
           <MediumSvg />
         </div>
         <div className="ml-4">
-          <SearchBar />
+          <div className="hidden sm:block">
+            <SearchBar />
+          </div>
         </div>
       </div>
       <div className="flex gap-8 items-center">
         <div className="flex gap-2">
-          <WriteSvg />
-          <div className="text-slate-600">Write</div>
+          <div className="hidden md:block">
+            <WriteSvg />
+            <div className="text-slate-600">Write</div>
+          </div>
+          <div className="sm:hidden">
+            <SearchSvg />
+          </div>
         </div>
         <div>
           <BellSvg />
