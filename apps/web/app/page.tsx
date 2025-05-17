@@ -5,10 +5,57 @@ export default function Home() {
   return (
     <div>
       <TopBar />
-      <div className="flex">
-        <TabBar />
+      <div className="flex gap-5">
+        <div>
+          <TabBar />
+        </div>
+        <div className="pt-10 border-l border-gray-200 ml-10 pl-5">
+          <RightCard />
+        </div>
       </div>
     </div>
+  );
+}
+
+// ----------- Code for Right Bar ---------------------
+
+function RightCard() {
+  return (
+    <div>
+      <div className="font-bold">Staff Picks</div>
+      <div className="flex pt-4 items-center gap-1">
+        <div>
+          <ProfileSvg />
+        </div>
+        <div className="text-slate-700 text-sm">James Horton, Ph.D</div>
+      </div>
+      <div className="font-extrabold pt-2 text-lg">
+        Things You Learn From Skimming 1350 Academy Jouranl Articles
+      </div>
+      <div className="flex pt-3 items-center gap-4">
+        <div>
+          <StarSvg />
+        </div>
+        <div className="text-slate-400">4d ago</div>
+      </div>
+    </div>
+  );
+}
+
+function StarSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="none"
+      viewBox="0 0 64 64"
+    >
+      <path
+        fill="#FFC017"
+        d="m39.637 40.831-5.771 15.871a1.99 1.99 0 0 1-3.732 0l-5.771-15.87a2.02 2.02 0 0 0-1.194-1.195L7.298 33.866a1.99 1.99 0 0 1 0-3.732l15.87-5.771a2.02 2.02 0 0 0 1.195-1.194l5.771-15.871a1.99 1.99 0 0 1 3.732 0l5.771 15.87a2.02 2.02 0 0 0 1.194 1.195l15.871 5.771a1.99 1.99 0 0 1 0 3.732l-15.87 5.771a2.02 2.02 0 0 0-1.195 1.194"
+      ></path>
+    </svg>
   );
 }
 
@@ -16,7 +63,7 @@ export default function Home() {
 
 function TabBar() {
   return (
-    <div className="scrollbar-hidden overflow-x-auto max-w-xl flex gap-6 p-3 pt-10 border-b border-gray-200">
+    <div className="scrollbar-hidden scroll-smooth overflow-hidden overflow-x-auto max-w-xl flex gap-6 p-3 pt-10 border-b border-gray-200">
       <div>
         <PlusSvg />
       </div>
