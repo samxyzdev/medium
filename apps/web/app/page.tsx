@@ -11,19 +11,26 @@ export default function Home() {
 
 function TopBar() {
   return (
-    <div className="flex justify-between p-2 shadow-xs ml-4 mr-4">
-      <div className="flex gap-3">
+    <div className="flex justify-between p-2 shadow-xs ml-4 mr-4 items-center">
+      <div className="flex gap-5">
         <div className="w-28">
           <MediumSvg />
         </div>
-        <div>
+        <div className="ml-4">
           <SearchBar />
         </div>
       </div>
-      <div className="flex gap-3">
-        <div>Write</div>
-        <div>Bell</div>
-        <div>Profile</div>
+      <div className="flex gap-8">
+        <div className="flex gap-2">
+          <WriteSvg />
+          <div>Write</div>
+        </div>
+        <div>
+          <BellSvg />
+        </div>
+        <div>
+          <ProfileSvg />
+        </div>
       </div>
     </div>
   );
@@ -64,6 +71,47 @@ function SearchSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="M4.092 11.06a6.95 6.95 0 1 1 13.9 0 6.95 6.95 0 0 1-13.9 0m6.95-8.05a8.05 8.05 0 1 0 5.13 14.26l3.75 3.75a.56.56 0 1 0 .79-.79l-3.73-3.73A8.05 8.05 0 0 0 11.042 3z"
+        clip-rule="evenodd"
+      ></path>
+    </svg>
+  );
+}
+
+function WriteSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+      aria-label="Write"
+    >
+      <path
+        fill="currentColor"
+        d="M14 4a.5.5 0 0 0 0-1zm7 6a.5.5 0 0 0-1 0zm-7-7H4v1h10zM3 4v16h1V4zm1 17h16v-1H4zm17-1V10h-1v10zm-1 1a1 1 0 0 0 1-1h-1zM3 20a1 1 0 0 0 1 1v-1zM4 3a1 1 0 0 0-1 1h1z"
+      ></path>
+      <path
+        stroke="currentColor"
+        d="m17.5 4.5-8.458 8.458a.25.25 0 0 0-.06.098l-.824 2.47a.25.25 0 0 0 .316.316l2.47-.823a.25.25 0 0 0 .098-.06L19.5 6.5m-2-2 2.323-2.323a.25.25 0 0 1 .354 0l1.646 1.646a.25.25 0 0 1 0 .354L19.5 6.5m-2-2 2 2"
+      ></path>
+    </svg>
+  );
+}
+
+function BellSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
@@ -73,7 +121,26 @@ function SearchSvg() {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+      />
+    </svg>
+  );
+}
+
+function ProfileSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="size-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
       />
     </svg>
   );
