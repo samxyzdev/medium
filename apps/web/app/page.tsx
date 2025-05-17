@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <TopBar />
-      <div className="flex gap-5">
+      <div className="flex gap-5 ">
         <div className="ml-4">
           <TabBar />
           <BlogCard />
@@ -13,7 +13,7 @@ export default function Home() {
           <BlogCard />
           <BlogCard />
         </div>
-        <div className="pt-10 border-l border-gray-200 ml-10 pl-5">
+        <div className="pt-10 border-l border-gray-200 pl-10 hidden lg:block">
           <div className="font-bold">Staff Picks</div>
           <RightCard />
           <RightCard />
@@ -27,35 +27,37 @@ export default function Home() {
 
 function BlogCard() {
   return (
-    <div className="border-b pb-6 border-gray-200 md:max-w-xl">
-      <div className="flex items-center pt-10">
-        <ProfileSvg />
-        <div className="text-sm pl-1">Rico Fritzsche</div>
-      </div>
-      <div className="flex pt-2">
-        <div>
-          <div className=" font-extrabold text-2xl">
-            Mastering PostgreSQL Row-Level Security (RLS) for Rock-Solig
-            Multi-Tenancy
-          </div>
-          <div className="pt-2">
-            How to Safeguard Saas Data from Cross-Tenant Leaks by Enforcing
-            Strict Tenant Isolation at the Database Layer
-          </div>
+    <div className="md: mx-9  lg:w-3xl lg:ml-96">
+      <div className="border-b pb-6 border-gray-200">
+        <div className="flex items-center pt-10">
+          <ProfileSvg />
+          <div className="text-sm pl-1 md:text-lg">Rico Fritzsche</div>
         </div>
-        <div className="w-60 h-28 border">{/* image url */}</div>
-      </div>
-      <div className="flex justify-between pt-6 w-96">
-        <div>Feb 12</div>
-        <div className="flex gap-5">
+        <div className="flex pt-2">
           <div>
-            <ShowLessLikeThisSvg />
+            <div className="font-extrabold text-2xl md:text-3xl">
+              Mastering PostgreSQL Row-Level Security (RLS) for Rock-Solig
+              Multi-Tenancy
+            </div>
+            <div className="pt-2 md:text-lg">
+              How to Safeguard Saas Data from Cross-Tenant Leaks by Enforcing
+              Strict Tenant Isolation at the Database Layer
+            </div>
           </div>
-          <div>
-            <BookMarkSvg />
-          </div>
-          <div>
-            <MoreSvg />
+          <div className="w-60 h-28 border">{/* image url */}</div>
+        </div>
+        <div className="flex justify-between pt-6 w-96 md:w-2xl">
+          <div className="md:text-xl">Feb 12</div>
+          <div className="flex gap-5">
+            <div className="w-6 md:w-9 lg:w-6">
+              <ShowLessLikeThisSvg />
+            </div>
+            <div className="w-6 md:w-9 lg:w-6">
+              <BookMarkSvg />
+            </div>
+            <div className="w-6 md:w-9 lg:w-6">
+              <MoreSvg />
+            </div>
           </div>
         </div>
       </div>
@@ -67,11 +69,9 @@ function ShowLessLikeThisSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
       fill="none"
       viewBox="0 0 24 24"
-      className="mv mw"
+      className="mv mw w-full h-full"
     >
       <path
         stroke="currentColor"
@@ -87,11 +87,9 @@ function BookMarkSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
       fill="none"
       viewBox="0 0 24 24"
-      className="bk"
+      className="bk w-full h-full"
     >
       <path
         fill="#000"
@@ -105,10 +103,9 @@ function MoreSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
       fill="none"
       viewBox="0 0 24 24"
+      className="w-full h-full"
     >
       <path
         fill="currentColor"
@@ -164,7 +161,7 @@ function StarSvg() {
 
 function TabBar() {
   return (
-    <div className="scrollbar-hidden scroll-smooth overflow-hidden overflow-x-auto max-w-xl flex gap-6 p-3 pt-10 border-b border-gray-200">
+    <div className="scrollbar-hidden scroll-smooth overflow-hidden overflow-x-auto w-3xl flex gap-6 p-3 pt-10 border-b border-gray-200 text-xl  sm:text-lg md:mx-9 lg:ml-96">
       <div>
         <PlusSvg />
       </div>
