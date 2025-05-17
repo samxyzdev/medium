@@ -203,11 +203,11 @@ function TopBar() {
   return (
     <div className="flex justify-between p-2 shadow-xs ml-4 mr-4 items-center">
       <div className="flex gap-5">
-        <div className="w-28">
+        <div className="w-32 sm:w-28">
           <MediumSvg />
         </div>
         <div className="ml-4">
-          <div className="hidden sm:block">
+          <div className="hidden  sm:block">
             <SearchBar />
           </div>
         </div>
@@ -218,11 +218,11 @@ function TopBar() {
             <WriteSvg />
             <div className="text-slate-600">Write</div>
           </div>
-          <div className="sm:hidden">
+          <div className="w-10 sm:hidden">
             <SearchSvg />
           </div>
         </div>
-        <div>
+        <div className="w-10">
           <BellSvg />
         </div>
         <div>
@@ -235,8 +235,10 @@ function TopBar() {
 
 function SearchBar() {
   return (
-    <div className="relative flex gap-3 shadow-xs p-2 rounded-2xl bg-slate-50">
-      <SearchSvg />
+    <div className="relative flex gap-3 shadow-xs p-2 rounded-2xl bg-slate-50 ">
+      <div className="w-7">
+        <SearchSvg />
+      </div>
       <input
         type="text"
         placeholder="Search"
@@ -268,10 +270,9 @@ function SearchSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
       fill="none"
       viewBox="0 0 24 24"
+      className="w-full h-full"
     >
       <path
         fill="currentColor"
@@ -315,7 +316,7 @@ function BellSvg() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="size-6 text-gray-600"
+      className="size-6 text-gray-600 w-full h-full"
     >
       <path
         strokeLinecap="round"
