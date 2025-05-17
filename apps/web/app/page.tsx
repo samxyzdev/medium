@@ -20,10 +20,10 @@ function TopBar() {
           <SearchBar />
         </div>
       </div>
-      <div className="flex gap-8">
+      <div className="flex gap-8 items-center">
         <div className="flex gap-2">
           <WriteSvg />
-          <div>Write</div>
+          <div className="text-slate-600">Write</div>
         </div>
         <div>
           <BellSvg />
@@ -95,6 +95,8 @@ function WriteSvg() {
       fill="none"
       viewBox="0 0 24 24"
       aria-label="Write"
+      className="text-gray-600" // 👈 makes both fill and stroke lighter
+      strokeWidth="1"
     >
       <path
         fill="currentColor"
@@ -116,7 +118,7 @@ function BellSvg() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="size-6"
+      className="size-6 text-gray-600"
     >
       <path
         strokeLinecap="round"
@@ -135,7 +137,7 @@ function ProfileSvg() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="size-6"
+      className="size-9"
     >
       <path
         strokeLinecap="round"
