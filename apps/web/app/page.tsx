@@ -5,10 +5,52 @@ export default function Home() {
   return (
     <div>
       <TopBar />
+      <div className="flex">
+        <TabBar />
+      </div>
     </div>
   );
 }
 
+// ----------- Code for TAB Bar ------------
+
+function TabBar() {
+  return (
+    <div className="scrollbar-hidden overflow-x-auto max-w-xl flex gap-6 p-3 pt-10 border-b border-gray-200">
+      <div>
+        <PlusSvg />
+      </div>
+      <div className="text-slate-700 flex-shrink-0 ">For you</div>
+      <div className="text-slate-700 flex-shrink-0 ">Following</div>
+      <div className="text-slate-700 flex-shrink-0 ">Featured</div>
+      <div className="text-slate-700 flex-shrink-0 ">Technology</div>
+      <div className="text-slate-700 flex-shrink-0 ">Data Science</div>
+      <div className="text-slate-700 flex-shrink-0 ">Following</div>
+      <div className="text-slate-700 flex-shrink-0 ">Following</div>
+    </div>
+  );
+}
+
+function PlusSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="size-5 text-slate-500"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 4.5v15m7.5-7.5h-15"
+      />
+    </svg>
+  );
+}
+
+// ------------- Code For TOP Bar --------------------
 function TopBar() {
   return (
     <div className="flex justify-between p-2 shadow-xs ml-4 mr-4 items-center">
@@ -78,7 +120,7 @@ function SearchSvg() {
     >
       <path
         fill="currentColor"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M4.092 11.06a6.95 6.95 0 1 1 13.9 0 6.95 6.95 0 0 1-13.9 0m6.95-8.05a8.05 8.05 0 1 0 5.13 14.26l3.75 3.75a.56.56 0 1 0 .79-.79l-3.73-3.73A8.05 8.05 0 0 0 11.042 3z"
         clip-rule="evenodd"
       ></path>
