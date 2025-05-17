@@ -9,8 +9,15 @@ export default function Home() {
         <div className="ml-4">
           <TabBar />
           <BlogCard />
+          <BlogCard />
+          <BlogCard />
+          <BlogCard />
         </div>
         <div className="pt-10 border-l border-gray-200 ml-10 pl-5">
+          <div className="font-bold">Staff Picks</div>
+          <RightCard />
+          <RightCard />
+          <RightCard />
           <RightCard />
         </div>
       </div>
@@ -23,7 +30,7 @@ function BlogCard() {
     <div className="border-b pb-6 border-gray-200 ">
       <div className="flex items-center pt-10">
         <ProfileSvg />
-        <div className="text-sm">Rico Fritzsche</div>
+        <div className="text-sm pl-1">Rico Fritzsche</div>
       </div>
       <div className="flex pt-2">
         <div>
@@ -38,7 +45,7 @@ function BlogCard() {
         </div>
         <div className="w-60 h-28 border">{/* image url */}</div>
       </div>
-      <div className="flex justify-between pt-6">
+      <div className="flex justify-between pt-6 w-96">
         <div>Feb 12</div>
         <div className="flex gap-5">
           <div>
@@ -116,22 +123,21 @@ function MoreSvg() {
 
 function RightCard() {
   return (
-    <div>
-      <div className="font-bold">Staff Picks</div>
+    <div className="w-80">
       <div className="flex pt-4 items-center gap-1">
         <div>
           <ProfileSvg />
         </div>
         <div className="text-slate-700 text-sm">James Horton, Ph.D</div>
       </div>
-      <div className="font-extrabold pt-2 text-lg">
+      <div className="font-extrabold pt-2 text-md">
         Things You Learn From Skimming 1350 Academy Jouranl Articles
       </div>
       <div className="flex pt-3 items-center gap-4">
         <div>
           <StarSvg />
         </div>
-        <div className="text-slate-400">4d ago</div>
+        <div className="text-slate-400 text-sm">4d ago</div>
       </div>
     </div>
   );
