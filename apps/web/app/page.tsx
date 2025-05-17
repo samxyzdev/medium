@@ -7,42 +7,49 @@ export default function Home() {
       <TopBar />
       <div className="flex gap-5 ">
         <div className="ml-4">
-          <TabBar />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
+          <TabBar tabName="For you" />
+          <BlogCard
+            authorName={"Rico Fritzsche"}
+            title={
+              "Mastering PostgreSQL Row-Level Security (RLS) for Rock-SoligMulti-Tenancy"
+            }
+            description={
+              "How to Safeguard Saas Data from Cross-Tenant Leaks by Enforcing Strict Tenant Isolation at the Database Layer"
+            }
+          />
         </div>
         <div className="pt-10 border-l border-gray-200 pl-10 hidden lg:block">
           <div className="font-bold">Staff Picks</div>
-          <RightCard />
-          <RightCard />
-          <RightCard />
-          <RightCard />
+          <RightCard
+            authorName={"James Horton, Ph.D"}
+            title={
+              "Things You Learn From Skimming 1350 Academy Jouranl Articles"
+            }
+          />
         </div>
       </div>
     </div>
   );
 }
 
-function BlogCard() {
+interface BlogCard {
+  authorName: string;
+  title: string;
+  description: string;
+}
+
+function BlogCard({ authorName, title, description }: BlogCard) {
   return (
     <div className="md: mx-9  lg:w-3xl lg:ml-96">
       <div className="border-b pb-6 border-gray-200">
         <div className="flex items-center pt-10">
-          <ProfileSvg />
-          <div className="text-sm pl-1 md:text-lg">Rico Fritzsche</div>
+          <ProfileSvg size="size-5" />
+          <div className="text-sm pl-1 md:text-lg">{authorName}</div>
         </div>
         <div className="flex pt-2">
           <div>
-            <div className="font-extrabold text-2xl md:text-3xl">
-              Mastering PostgreSQL Row-Level Security (RLS) for Rock-Solig
-              Multi-Tenancy
-            </div>
-            <div className="pt-2 md:text-lg">
-              How to Safeguard Saas Data from Cross-Tenant Leaks by Enforcing
-              Strict Tenant Isolation at the Database Layer
-            </div>
+            <div className="font-extrabold text-2xl md:text-3xl">{title}</div>
+            <div className="pt-2 md:text-lg">{description}</div>
           </div>
           <div className="w-60 h-28 border">{/* image url */}</div>
         </div>
@@ -118,18 +125,21 @@ function MoreSvg() {
 }
 // ----------- Code for Right Bar ---------------------
 
-function RightCard() {
+interface RightCard {
+  authorName: string;
+  title: string;
+}
+
+function RightCard({ authorName, title }: RightCard) {
   return (
     <div className="w-80">
       <div className="flex pt-4 items-center gap-1">
         <div>
-          <ProfileSvg />
+          <ProfileSvg size="size-4" />
         </div>
-        <div className="text-slate-700 text-sm">James Horton, Ph.D</div>
+        <div className="text-slate-700 text-sm">{authorName}</div>
       </div>
-      <div className="font-extrabold pt-2 text-md">
-        Things You Learn From Skimming 1350 Academy Jouranl Articles
-      </div>
+      <div className="font-extrabold pt-2 text-md">{title}</div>
       <div className="flex pt-3 items-center gap-4">
         <div>
           <StarSvg />
@@ -159,19 +169,13 @@ function StarSvg() {
 
 // ----------- Code for TAB Bar ------------
 
-function TabBar() {
+function TabBar({ tabName }: { tabName: string }) {
   return (
-    <div className="scrollbar-hidden scroll-smooth overflow-hidden overflow-x-auto w-3xl flex gap-6 p-3 pt-10 border-b border-gray-200 text-xl  sm:text-lg md:mx-9 lg:ml-96">
+    <div className="scrollbar-hidden scroll-smooth overflow-hidden overflow-x-auto w-3xl flex items-center gap-6 p-3 pt-10 border-b border-gray-200 text-xl  sm:text-lg md:mx-9 lg:ml-96">
       <div>
         <PlusSvg />
       </div>
-      <div className="text-slate-700 flex-shrink-0 ">For you</div>
-      <div className="text-slate-700 flex-shrink-0 ">Following</div>
-      <div className="text-slate-700 flex-shrink-0 ">Featured</div>
-      <div className="text-slate-700 flex-shrink-0 ">Technology</div>
-      <div className="text-slate-700 flex-shrink-0 ">Data Science</div>
-      <div className="text-slate-700 flex-shrink-0 ">Following</div>
-      <div className="text-slate-700 flex-shrink-0 ">Following</div>
+      <div className="text-slate-700 flex-shrink-0 ">{tabName}</div>
     </div>
   );
 }
@@ -219,11 +223,11 @@ function TopBar() {
             <SearchSvg />
           </div>
         </div>
-        <div className="w-10">
+        <div className="w-10 sm:w-8 md:w-8">
           <BellSvg />
         </div>
         <div>
-          <ProfileSvg />
+          <ProfileSvg size="size-9" />
         </div>
       </div>
     </div>
@@ -324,7 +328,7 @@ function BellSvg() {
   );
 }
 
-function ProfileSvg() {
+function ProfileSvg({ size }: { size: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -332,7 +336,7 @@ function ProfileSvg() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="size-9"
+      className={size}
     >
       <path
         strokeLinecap="round"
