@@ -82,8 +82,8 @@ function ShowLessLikeThisSvg() {
     >
       <path
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18M8.25 12h7.5"
       ></path>
     </svg>
@@ -253,10 +253,10 @@ function MediumSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      className="bj bk bl w-full h-full dark:text-white"
       fill="none"
       aria-labelledby="wordmark-medium-desc"
       viewBox="0 0 719 160"
-      className="bj bk bl w-full h-full"
     >
       <desc id="wordmark-medium-desc">Medium Logo</desc>
       <path
@@ -279,7 +279,7 @@ function SearchSvg() {
         fill="currentColor"
         fillRule="evenodd"
         d="M4.092 11.06a6.95 6.95 0 1 1 13.9 0 6.95 6.95 0 0 1-13.9 0m6.95-8.05a8.05 8.05 0 1 0 5.13 14.26l3.75 3.75a.56.56 0 1 0 .79-.79l-3.73-3.73A8.05 8.05 0 0 0 11.042 3z"
-        clip-rule="evenodd"
+        clipRule="evenodd"
       ></path>
     </svg>
   );
