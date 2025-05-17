@@ -6,8 +6,9 @@ export default function Home() {
     <div>
       <TopBar />
       <div className="flex gap-5">
-        <div>
+        <div className="ml-4">
           <TabBar />
+          <BlogCard />
         </div>
         <div className="pt-10 border-l border-gray-200 ml-10 pl-5">
           <RightCard />
@@ -17,6 +18,100 @@ export default function Home() {
   );
 }
 
+function BlogCard() {
+  return (
+    <div className="border-b pb-6 border-gray-200 ">
+      <div className="flex items-center pt-10">
+        <ProfileSvg />
+        <div className="text-sm">Rico Fritzsche</div>
+      </div>
+      <div className="flex pt-2">
+        <div>
+          <div className=" font-extrabold text-2xl">
+            Mastering PostgreSQL Row-Level Security (RLS) for Rock-Solig
+            Multi-Tenancy
+          </div>
+          <div className="pt-2">
+            How to Safeguard Saas Data from Cross-Tenant Leaks by Enforcing
+            Strict Tenant Isolation at the Database Layer
+          </div>
+        </div>
+        <div className="w-60 h-28 border">{/* image url */}</div>
+      </div>
+      <div className="flex justify-between pt-6">
+        <div>Feb 12</div>
+        <div className="flex gap-5">
+          <div>
+            <ShowLessLikeThisSvg />
+          </div>
+          <div>
+            <BookMarkSvg />
+          </div>
+          <div>
+            <MoreSvg />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ShowLessLikeThisSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+      className="mv mw"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18M8.25 12h7.5"
+      ></path>
+    </svg>
+  );
+}
+
+function BookMarkSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+      className="bk"
+    >
+      <path
+        fill="#000"
+        d="M17.5 1.25a.5.5 0 0 1 1 0v2.5H21a.5.5 0 0 1 0 1h-2.5v2.5a.5.5 0 0 1-1 0v-2.5H15a.5.5 0 0 1 0-1h2.5zm-11 4.5a1 1 0 0 1 1-1H11a.5.5 0 0 0 0-1H7.5a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4z"
+      ></path>
+    </svg>
+  );
+}
+
+function MoreSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M4.385 12c0 .55.2 1.02.59 1.41.39.4.86.59 1.41.59s1.02-.2 1.41-.59c.4-.39.59-.86.59-1.41s-.2-1.02-.59-1.41a1.93 1.93 0 0 0-1.41-.59c-.55 0-1.02.2-1.41.59-.4.39-.59.86-.59 1.41m5.62 0c0 .55.2 1.02.58 1.41.4.4.87.59 1.42.59s1.02-.2 1.41-.59c.4-.39.59-.86.59-1.41s-.2-1.02-.59-1.41a1.93 1.93 0 0 0-1.41-.59c-.55 0-1.03.2-1.42.59s-.58.86-.58 1.41m5.6 0c0 .55.2 1.02.58 1.41.4.4.87.59 1.43.59s1.03-.2 1.42-.59.58-.86.58-1.41-.2-1.02-.58-1.41a1.93 1.93 0 0 0-1.42-.59c-.56 0-1.04.2-1.43.59s-.58.86-.58 1.41"
+        clipRule="evenodd"
+      ></path>
+    </svg>
+  );
+}
 // ----------- Code for Right Bar ---------------------
 
 function RightCard() {
