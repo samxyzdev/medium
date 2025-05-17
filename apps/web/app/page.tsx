@@ -216,8 +216,10 @@ function TopBar() {
       <div className="flex gap-8 items-center">
         <div className="flex gap-2">
           <div className="hidden md:block">
-            <WriteSvg />
-            <div className="text-slate-600">Write</div>
+            <div className="flex gap-2">
+              <WriteSvg />
+              <div className="text-slate-600">Write</div>
+            </div>
           </div>
           <div className="w-10 sm:hidden">
             <SearchSvg />
