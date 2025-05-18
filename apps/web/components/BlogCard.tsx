@@ -11,7 +11,7 @@ interface BlogCard {
 
 export const BlogCard = ({ authorName, title, description }: BlogCard) => {
   return (
-    <div className="md: mx-9  lg:w-3xl lg:ml-96">
+    <div className="max-w-sm sm:max-w-lg md:max-w-xl  mx-9  lg:max-w-3xl lg:ml-96">
       <div className="border-b pb-6 border-gray-200">
         <div className="flex items-center pt-10">
           <ProfileSVG size="size-5" />
@@ -24,16 +24,16 @@ export const BlogCard = ({ authorName, title, description }: BlogCard) => {
           </div>
           <div className="w-60 h-28 border">{/* image url */}</div>
         </div>
-        <div className="flex justify-between pt-6 w-96 md:w-2xl">
-          <div className="md:text-xl">Feb 12</div>
+        <div className="flex justify-between pt-6 w-96 md:w-xl">
+          <div className="md:text-lg">Feb 12</div>
           <div className="flex gap-5">
-            <div className="w-6 md:w-9 lg:w-6">
+            <div className="w-6 md:w-7 lg:w-6">
               <ShowLessLikeThisSvg />
             </div>
-            <div className="w-6 md:w-9 lg:w-6">
+            <div className="w-6 md:w-7 lg:w-6">
               <BookMarkSvg />
             </div>
-            <div className="w-6 md:w-9 lg:w-6">
+            <div className="w-6 md:w-7 lg:w-6">
               <MoreSvg />
             </div>
           </div>
