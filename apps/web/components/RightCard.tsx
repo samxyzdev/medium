@@ -11,7 +11,7 @@ export const RightCard = ({ authorName, title }: RightCard) => {
     <div className="w-80">
       <div className="flex pt-4 items-center gap-1">
         <div>
-          <ProfileSVG size="size-4" />
+          <ProfileSVG className="w-5 h-5 hover:cursor-pointer" />
         </div>
         <div className="text-slate-700 text-sm">{authorName}</div>
       </div>

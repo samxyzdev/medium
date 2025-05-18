@@ -14,7 +14,7 @@ export const BlogCard = ({ authorName, title, description }: BlogCard) => {
     <div className="max-w-sm sm:max-w-lg md:max-w-xl  mx-9  lg:max-w-3xl lg:ml-96">
       <div className="border-b pb-6 border-gray-200">
         <div className="flex items-center pt-10">
-          <ProfileSVG size="size-5" />
+          <ProfileSVG className="w-5 h-5 hover:cursor-pointer" />
           <div className="text-sm pl-1 md:text-lg">{authorName}</div>
         </div>
         <div className="flex pt-2">

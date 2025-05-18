@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BellSVG } from "../app/Icon/BellSVG";
 import { MediumSVG } from "../app/Icon/MediumSVG";
 import { ProfileSVG } from "../app/Icon/ProfileSVG";
@@ -9,8 +10,10 @@ export const TopBar = () => {
   return (
     <div className="flex justify-between p-2 shadow-xs ml-4 mr-4 items-center">
       <div className="flex gap-5">
-        <div className="w-32 sm:w-28">
-          <MediumSVG />
+        <div className="w-32 sm:w-28 hover:cursor-pointer">
+          <Link href={"/dashboard"}>
+            <MediumSVG />
+          </Link>
         </div>
         <div className="ml-4">
           <div className="hidden  sm:block">
@@ -20,21 +23,28 @@ export const TopBar = () => {
       </div>
       <div className="flex gap-8 items-center">
         <div className="flex gap-2">
-          <div className="hidden md:block">
-            <div className="flex gap-2">
-              <WriteSVG />
-              <div className="text-slate-600">Write</div>
-            </div>
+          <div className="hidden md:block ">
+            <Link href={"/writeblog"}>
+              <div className="flex gap-2 hover:cursor-pointer group">
+                <WriteSVG className="text-slate-600 group-hover:text-gray-950" />
+                <div className="text-slate-600 group-hover:text-gray-950 ">
+                  Write
+                </div>
+              </div>
+            </Link>
           </div>
-          <div className="w-10 sm:hidden">
+          <div className="w-10 sm:hidden hover:cursor-pointer">
             <SearchSVG />
           </div>
         </div>
-        <div className="w-10 sm:w-8 md:w-8">
-          <BellSVG />
+        <div className="w-10 sm:w-8 md:w-8 hover:cursor-pointer">
+          <BellSVG className="size-6 text-gray-600 w-full h-full hover:text-gray-950" />
         </div>
         <div>
-          <ProfileSVG size="size-9" />
+          <ProfileSVG
+            className="w-10 h-10 hover:bg-gray-400 hover:cursor-pointer"
+            textSize="text-md"
+          />
         </div>
       </div>
     </div>

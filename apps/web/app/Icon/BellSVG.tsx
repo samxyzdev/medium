@@ -1,4 +1,4 @@
-export const BellSVG = () => {
+export const BellSVG = ({ className = "" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +6,7 @@ export const BellSVG = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="size-6 text-gray-600 w-full h-full"
+      className={className}
     >
       <path
         strokeLinecap="round"

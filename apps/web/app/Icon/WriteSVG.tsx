@@ -1,4 +1,4 @@
-export const WriteSVG = () => {
+export const WriteSVG = ({ className = "" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -7,7 +7,7 @@ export const WriteSVG = () => {
       fill="none"
       viewBox="0 0 24 24"
       aria-label="Write"
-      className="text-gray-600" // 👈 makes both fill and stroke lighter
+      className={className} // 👈 makes both fill and stroke lighter
       strokeWidth="1"
     >
       <path
