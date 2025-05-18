@@ -1,0 +1,44 @@
+import { BookMarkSvg } from "../app/Icon/BookMarkSVG";
+import { MoreSvg } from "../app/Icon/MoreSVG";
+import { ProfileSVG } from "../app/Icon/ProfileSVG";
+import { ShowLessLikeThisSvg } from "../app/Icon/ShowLessLikeThisSVG";
+
+interface BlogCard {
+  authorName: string;
+  title: string;
+  description: string;
+}
+
+export const BlogCard = ({ authorName, title, description }: BlogCard) => {
+  return (
+    <div className="md: mx-9  lg:w-3xl lg:ml-96">
+      <div className="border-b pb-6 border-gray-200">
+        <div className="flex items-center pt-10">
+          <ProfileSVG size="size-5" />
+          <div className="text-sm pl-1 md:text-lg">{authorName}</div>
+        </div>
+        <div className="flex pt-2">
+          <div>
+            <div className="font-extrabold text-2xl md:text-3xl">{title}</div>
+            <div className="pt-2 md:text-lg">{description}</div>
+          </div>
+          <div className="w-60 h-28 border">{/* image url */}</div>
+        </div>
+        <div className="flex justify-between pt-6 w-96 md:w-2xl">
+          <div className="md:text-xl">Feb 12</div>
+          <div className="flex gap-5">
+            <div className="w-6 md:w-9 lg:w-6">
+              <ShowLessLikeThisSvg />
+            </div>
+            <div className="w-6 md:w-9 lg:w-6">
+              <BookMarkSvg />
+            </div>
+            <div className="w-6 md:w-9 lg:w-6">
+              <MoreSvg />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
