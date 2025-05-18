@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { BellSVG } from "../app/Icon/BellSVG";
 import { MediumSVG } from "../app/Icon/MediumSVG";
@@ -5,8 +6,10 @@ import { ProfileSVG } from "../app/Icon/ProfileSVG";
 import { SearchSVG } from "../app/Icon/SearchSVG";
 import { WriteSVG } from "../app/Icon/WriteSVG";
 import { SearchBar } from "./SearchBar";
+import { usePathname } from "next/navigation";
 
 export const TopBar = () => {
+  const pathName = usePathname();
   return (
     <div className="flex justify-between p-2 shadow-xs ml-4 mr-4 items-center">
       <div className="flex gap-5">
