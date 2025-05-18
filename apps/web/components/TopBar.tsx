@@ -27,14 +27,22 @@ export const TopBar = () => {
       <div className="flex gap-8 items-center">
         <div className="flex gap-2">
           <div className="hidden md:block ">
-            <Link href={"/writeblog"}>
-              <div className="flex gap-2 hover:cursor-pointer group">
-                <WriteSVG className="text-slate-600 group-hover:text-gray-950" />
-                <div className="text-slate-600 group-hover:text-gray-950 ">
-                  Write
+            {pathName === "/writs" ? (
+              <Link href={"/writeblog"}>
+                <div className="flex gap-2 hover:cursor-pointer group">
+                  <WriteSVG className="text-slate-600 group-hover:text-gray-950" />
+                  <div className="text-slate-600 group-hover:text-gray-950 ">
+                    Write
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            ) : (
+              <button
+                className={`bg-green-700 rounded-xl text-white h-7 w-20  hover:bg-green-900 hover:cursor-pointer`}
+              >
+                Publish
+              </button>
+            )}
           </div>
           <div className="w-10 sm:hidden hover:cursor-pointer">
             <SearchSVG />

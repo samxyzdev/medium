@@ -13,8 +13,6 @@ export default function Write() {
   );
 }
 
-// import { Plus } from "lucide-react";
-
 function WriteBox() {
   const [title, setTitle] = useState("");
   const [story, setStory] = useState("");
