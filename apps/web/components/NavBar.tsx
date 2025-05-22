@@ -11,13 +11,17 @@ import { usePathname } from "next/navigation";
 export const NavBar = ({
   onclick,
   initials,
+  className = "border-b border-gray-200",
 }: {
   onclick?: () => void;
-  initials: string;
+  initials?: string;
+  className?: string;
 }) => {
   const pathName = usePathname();
   return (
-    <section className="flex justify-between p-2 shadow-xs ml-4 mr-4 items-center">
+    <section
+      className={`flex justify-between p-2 ${className} ml-4 mr-4 items-center`}
+    >
       <div className="flex gap-7">
         <div className="w-32 sm:w-28 hover:cursor-pointer">
           <Link href={"/dashboard"}>
@@ -30,7 +34,6 @@ export const NavBar = ({
           </div>
         </div>
       </div>
-
       <div className="flex gap-8 items-center">
         <div className="flex gap-2">
           <div className="hidden md:block ">
