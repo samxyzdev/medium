@@ -5,6 +5,7 @@ import { TabBar } from "../../components/TabBar";
 import { NavBar } from "../../components/NavBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { PlusSVG } from "../Icon/PlusSVG";
 
 // Type for a single blog
 type Blog = {
@@ -21,6 +22,15 @@ type Blog = {
 type Top10BlogResponse = {
   top10LatestBlog: Blog[];
 };
+
+const tabName = [
+  "For You",
+  "Following",
+  "Feartured",
+  "Technology",
+  "Data Science",
+  "Programming",
+];
 
 export default function Home() {
   const [data, setData] = useState<Top10BlogResponse | null>(null);
@@ -53,18 +63,29 @@ export default function Home() {
   return (
     <main>
       <NavBar initials={"OW"} />
-      <div className="flex gap-5">
-        <div className="ml-4">
-          <TabBar tabName="For you" />
-          {data?.top10LatestBlog?.map((blog) => (
-            <BlogCard
-              key={blog.id}
-              authorName={blog.User.username}
-              title={blog.title}
-              description={blog.content}
-              initials={blog.User.username.slice(0, 2).toUpperCase()}
-            />
-          ))}
+      <div className="flex gap-5 md:block">
+        <div className="flex justify-center mx-5">
+          <div>
+            <div className="flex items-center justify-center gap-7 mt-12 border-b border-gray-200 pb-5 md:mt-4">
+              <PlusSVG />
+              <div className="flex gap-7 whitespace-nowrap">
+                {tabName.map((name) => (
+                  <TabBar key={name} tabName={name} />
+                ))}
+              </div>
+            </div>
+            <div className="flex items-start sm:justify-center">
+              {data?.top10LatestBlog?.map((blog) => (
+                <BlogCard
+                  key={blog.id}
+                  authorName={blog.User.username}
+                  title={blog.title}
+                  description={blog.content}
+                  initials={blog.User.username.slice(0, 2).toUpperCase()}
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="pt-10 border-l border-gray-200 pl-10 hidden lg:block">
