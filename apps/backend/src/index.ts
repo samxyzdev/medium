@@ -4,10 +4,13 @@ import { authMiddleware } from "./middleware.js";
 import { UserSchema, BlogSchema } from "@repo/db/schema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import "dotenv/config";
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 const signupUserSchema = UserSchema.omit({ id: true });
 app.post("/signup", async (req, res) => {
   console.log(req.body);
@@ -77,6 +80,9 @@ app.post("/signin", async (req, res) => {
 
 const createBlogSchema = BlogSchema.omit({ id: true, autherId: true });
 app.post("/create/blog", authMiddleware, async (req, res) => {
+  console.log("HEllo from create blog");
+  console.log(req.id);
+
   const blogData = createBlogSchema.safeParse(req.body);
   if (!blogData.success) {
     res.json({
@@ -137,7 +143,16 @@ app.put("/user/edit/:blog", authMiddleware, async (req, res) => {
 });
 
 app.get("/top10blog", async (req, res) => {
-  const top10LatestBlog = await prisma.blog.findMany({ take: 10 });
+  const top10LatestBlog = await prisma.blog.findMany({
+    take: 10,
+    include: {
+      User: {
+        select: {
+          username: true,
+        },
+      },
+    },
+  });
   res.json({
     top10LatestBlog,
   });

@@ -13,13 +13,13 @@ export const authMiddleware = (
     });
     return;
   }
-  const decoded = jwt.verify(jwtToken, "sameer ahmed");
+  const decoded = jwt.verify(jwtToken, process.env.JWT_SECRET!);
   if (!decoded) {
     res.json({
       msg: "You are not authorized",
     });
     return;
   }
-  req.id = (decoded as JwtPayload).id;
+  req.id = (decoded as JwtPayload).userId;
   next();
 };
