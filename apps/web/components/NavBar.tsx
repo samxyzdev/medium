@@ -8,22 +8,29 @@ import { WriteSVG } from "../app/Icon/WriteSVG";
 import { SearchBar } from "./SearchBar";
 import { usePathname } from "next/navigation";
 
-export const NavBar = ({ onclick }: { onclick?: () => void }) => {
+export const NavBar = ({
+  onclick,
+  initials,
+}: {
+  onclick?: () => void;
+  initials: string;
+}) => {
   const pathName = usePathname();
   return (
     <section className="flex justify-between p-2 shadow-xs ml-4 mr-4 items-center">
-      <div className="flex gap-5">
+      <div className="flex gap-7">
         <div className="w-32 sm:w-28 hover:cursor-pointer">
           <Link href={"/dashboard"}>
             <MediumSVG />
           </Link>
         </div>
-        <div className="ml-4">
+        <div className="">
           <div className="hidden  sm:block">
             <SearchBar />
           </div>
         </div>
       </div>
+
       <div className="flex gap-8 items-center">
         <div className="flex gap-2">
           <div className="hidden md:block ">
@@ -36,9 +43,9 @@ export const NavBar = ({ onclick }: { onclick?: () => void }) => {
               </button>
             ) : (
               <Link href={"/writeblog"}>
-                <div className="flex gap-2 hover:cursor-pointer group">
-                  <WriteSVG className="text-slate-600 group-hover:text-gray-950" />
-                  <div className="text-slate-600 group-hover:text-gray-950 ">
+                <div className="flex gap-1 hover:cursor-pointer group items-center">
+                  <WriteSVG className="text-gray-600 group-hover:text-gray-950" />
+                  <div className="text-gray-600 group-hover:text-gray-950 text-sm">
                     Write
                   </div>
                 </div>
@@ -49,13 +56,14 @@ export const NavBar = ({ onclick }: { onclick?: () => void }) => {
             <SearchSVG />
           </div>
         </div>
-        <div className="w-10 sm:w-8 md:w-8 hover:cursor-pointer">
-          <BellSVG className="size-6 text-gray-600 w-full h-full hover:text-gray-950" />
+        <div className="w-10 sm:w-8 md:w-7 hover:cursor-pointer">
+          <BellSVG className=" text-gray-500 w-full h-full hover:text-gray-950" />
         </div>
         <div>
           <ProfileSVG
             className="w-10 h-10 hover:bg-gray-400 hover:cursor-pointer"
             textSize="text-md"
+            initials={initials}
           />
         </div>
       </div>

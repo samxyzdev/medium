@@ -44,7 +44,7 @@ export default function Home() {
   if (!data) {
     return (
       <main>
-        <NavBar />
+        <NavBar initials={"OW"} />
         <div>Loading...</div>
       </main>
     );
@@ -52,7 +52,7 @@ export default function Home() {
 
   return (
     <main>
-      <NavBar />
+      <NavBar initials={"OW"} />
       <div className="flex gap-5">
         <div className="ml-4">
           <TabBar tabName="For you" />
@@ -62,6 +62,7 @@ export default function Home() {
               authorName={blog.User.username}
               title={blog.title}
               description={blog.content}
+              initials={blog.User.username.slice(0, 2).toUpperCase()}
             />
           ))}
         </div>
@@ -73,6 +74,7 @@ export default function Home() {
               key={blog.id}
               authorName={blog.User.username}
               title={blog.title}
+              initials={blog.User.username.slice(0, 2).toUpperCase()}
             />
           ))}
         </div>

@@ -4,9 +4,9 @@ export const BellSVG = ({ className = "" }) => {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
+      strokeWidth="1"
       stroke="currentColor"
-      className={className}
+      className={`${className} w-full h-full`}
     >
       <path
         strokeLinecap="round"

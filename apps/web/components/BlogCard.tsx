@@ -2,19 +2,29 @@ import { BookMarkSvg } from "../app/Icon/BookMarkSVG";
 import { MoreSvg } from "../app/Icon/MoreSVG";
 import { ProfileSVG } from "../app/Icon/ProfileSVG";
 import { ShowLessLikeThisSvg } from "../app/Icon/ShowLessLikeThisSVG";
-
+import Image from "next/image";
+import budha from "./budha.png";
 interface BlogCard {
   authorName: string;
   title: string;
   description: string;
+  initials: string;
 }
 
-export const BlogCard = ({ authorName, title, description }: BlogCard) => {
+export const BlogCard = ({
+  authorName,
+  title,
+  description,
+  initials,
+}: BlogCard) => {
   return (
     <div className="max-w-sm sm:max-w-lg md:max-w-xl  mx-9  lg:max-w-3xl lg:ml-96">
       <div className="border-b pb-6 border-gray-200">
         <div className="flex items-center pt-10">
-          <ProfileSVG className="w-5 h-5 hover:cursor-pointer" />
+          <ProfileSVG
+            className="w-5 h-5 hover:cursor-pointer"
+            initials={initials}
+          />
           <div className="text-sm pl-1 md:text-lg">{authorName}</div>
         </div>
         <div className="flex pt-2">
@@ -22,7 +32,14 @@ export const BlogCard = ({ authorName, title, description }: BlogCard) => {
             <div className="font-extrabold text-2xl md:text-3xl">{title}</div>
             <div className="pt-2 md:text-lg">{description}</div>
           </div>
-          <div className="w-60 h-28 border">{/* image url */}</div>
+          <div className="relative w-3xl h-28 border">
+            <Image
+              src={budha}
+              fill
+              alt="Picture of the author"
+              className="object-cover"
+            />
+          </div>
         </div>
         <div className="flex justify-between pt-6 w-96 md:w-xl">
           <div className="md:text-lg">Feb 12</div>
