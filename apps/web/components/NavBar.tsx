@@ -52,7 +52,7 @@ export const NavBar = ({
               </Link>
             )}
           </div>
-          <div className="w-10 sm:hidden hover:cursor-pointer">
+          <div className="w-10 sm:hidden hover:cursor-pointer text-gray-500">
             <SearchSVG />
           </div>
         </div>

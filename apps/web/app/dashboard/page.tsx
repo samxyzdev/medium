@@ -86,18 +86,17 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </div>
-
-        <div className="pt-10 border-l border-gray-200 pl-10 hidden lg:block">
-          <div className="font-bold">Staff Picks</div>
-          {data?.top10LatestBlog?.map((blog) => (
-            <RightCard
-              key={blog.id}
-              authorName={blog.User.username}
-              title={blog.title}
-              initials={blog.User.username.slice(0, 2).toUpperCase()}
-            />
-          ))}
+          <div className="pt-10 border-l border-gray-200 pl-10 hidden lg:block">
+            <div className="font-bold">Staff Picks</div>
+            {data?.top10LatestBlog?.map((blog) => (
+              <RightCard
+                key={blog.id}
+                authorName={blog.User.username}
+                title={blog.title}
+                initials={blog.User.username.slice(0, 2).toUpperCase()}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </main>
