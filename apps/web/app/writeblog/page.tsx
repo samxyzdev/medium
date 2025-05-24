@@ -7,6 +7,8 @@ export default function Write() {
   const [title, setTitle] = useState("");
   const [story, setStory] = useState("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [initial, setInitial] = useState<any>("");
+
   async function handleOnclickPublis() {
     try {
       const createBlog = await axios.post(
@@ -28,9 +30,12 @@ export default function Write() {
       alert("Something went wrong while publishings");
     }
   }
+  useEffect(() => {
+    setInitial(localStorage.getItem("initals"));
+  });
   return (
     <div className="">
-      <NavBar onclick={handleOnclickPublis} />
+      <NavBar onclick={handleOnclickPublis} initials={initial} />
       <div className="flex justify-center">
         {isSubmitted ? (
           <div className="p-10 bg-neutral-100 text-gray-500 rounded-md">

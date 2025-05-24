@@ -5,7 +5,7 @@ export const ProfileSVG = ({
 }: {
   className: string;
   textSize?: string;
-  initials: string;
+  initials?: string;
 }) => {
   return (
     <div

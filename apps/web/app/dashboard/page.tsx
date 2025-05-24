@@ -46,12 +46,14 @@ const getInitials = () => {
   if (!token) return "";
   try {
     const decoded = jwtDecode<MyTokenPayload>(token);
-    console.log(decoded);
-
     const username = decoded.username;
-    console.log(username);
-
-    return username ? username[0]?.toUpperCase() : "";
+    const inititals = username ? username[0]?.toUpperCase() : "";
+    console.log(`HELLO HOW ARE YOU ${inititals}`);
+    if (!inititals) {
+      return;
+    }
+    localStorage.setItem("initals", inititals);
+    return inititals;
   } catch (error) {
     console.error("Failed to decode token", error);
     return "";
