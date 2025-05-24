@@ -5,6 +5,8 @@ import { MediumSVG } from "../Icon/MediumSVG";
 import flower from "./flower.webp";
 import { useState } from "react";
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -130,6 +132,23 @@ function SignupCard({
 
 function SignupWithEmail({ onClose }: { onClose: () => void }) {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  async function HandleClick() {
+    try {
+      const data = await axios.post("http://localhost:3001/signup", {
+        username: email,
+        password: password,
+      });
+      if (data) {
+        localStorage.setItem("token", data.data.token);
+        router.push("/dashboard");
+      }
+    } catch (e) {
+      alert("there was any eeror creating an sccount");
+    }
+  }
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
@@ -161,8 +180,22 @@ function SignupWithEmail({ onClose }: { onClose: () => void }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <label className="block text-sm font-medium mb-1" htmlFor="email">
+            Password
+          </label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Enter your email address"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
-        <button className="w-full bg-black text-white py-2 rounded-full font-medium hover:bg-gray-900 transition">
+        <button
+          className="w-full bg-black text-white py-2 rounded-full font-medium hover:bg-gray-900 transition"
+          onClick={HandleClick}
+        >
           Create account
         </button>
         <div className="mt-6 text-center">

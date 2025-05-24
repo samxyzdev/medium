@@ -30,7 +30,10 @@ app.post("/signup", async (req, res) => {
     },
   });
   console.log(process.env.JWT_SECRET);
-  const token = jwt.sign({ userId: createUser.id }, process.env.JWT_SECRET!);
+  const token = jwt.sign(
+    { userId: createUser.id, username: createUser.username },
+    process.env.JWT_SECRET!
+  );
   res.json({
     msg: "User created succesfully",
     token: token,

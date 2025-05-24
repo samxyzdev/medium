@@ -6,6 +6,7 @@ import { NavBar } from "../../components/NavBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { PlusSVG } from "../Icon/PlusSVG";
+import { jwtDecode } from "jwt-decode";
 
 // Type for a single blog
 type Blog = {
@@ -31,10 +32,31 @@ const tabName = [
   "Data Science",
   "Programming",
 ];
+interface MyTokenPayload {
+  username: string;
+  // include other fields if needed
+}
+
+const getInitials = () => {
+  const token = localStorage.getItem("token");
+  if (!token) return "";
+  try {
+    const decoded = jwtDecode<MyTokenPayload>(token);
+    console.log(decoded);
+
+    const username = decoded.username;
+    console.log(username);
+
+    return username ? username[0]?.toUpperCase() : "";
+  } catch (error) {
+    console.error("Failed to decode token", error);
+    return "";
+  }
+};
 
 export default function Home() {
   const [data, setData] = useState<Top10BlogResponse | null>(null);
-
+  const initial = getInitials();
   useEffect(() => {
     async function backendRequest() {
       try {
@@ -54,7 +76,7 @@ export default function Home() {
   if (!data) {
     return (
       <main>
-        <NavBar initials={"OW"} />
+        <NavBar initials={initial} />
         <div>Loading...</div>
       </main>
     );
@@ -62,7 +84,7 @@ export default function Home() {
 
   return (
     <main>
-      <NavBar initials={"OW"} />
+      <NavBar initials={initial} />
       <div className="flex gap-5 md:block">
         <div className="flex justify-center mx-5">
           <div>
