@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { NavBar } from "../../components/NavBar";
 import axios from "axios";
-import { error } from "console";
 
 export default function Write() {
   const [title, setTitle] = useState("");
@@ -30,25 +29,23 @@ export default function Write() {
     }
   }
   return (
-    <>
-      <div className="mx-96">
-        <NavBar onclick={handleOnclickPublis} />
-        <div className="ml-32 mt-7">
-          {isSubmitted ? (
-            <div className="p-10 bg-neutral-100 text-gray-500 rounded-md">
-              Blog Created Susscefflyy
-            </div>
-          ) : (
-            <WriteBox
-              title={title}
-              setTitle={setTitle}
-              story={story}
-              setStory={setStory}
-            />
-          )}
-        </div>
+    <div className="">
+      <NavBar onclick={handleOnclickPublis} />
+      <div className="flex justify-center">
+        {isSubmitted ? (
+          <div className="p-10 bg-neutral-100 text-gray-500 rounded-md">
+            Blog Created Susscefflyy
+          </div>
+        ) : (
+          <WriteBox
+            title={title}
+            setTitle={setTitle}
+            story={story}
+            setStory={setStory}
+          />
+        )}
       </div>
-    </>
+    </div>
   );
 }
 
