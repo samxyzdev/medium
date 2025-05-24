@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavBar } from "../../components/NavBar";
 import axios from "axios";
 
@@ -8,6 +8,23 @@ export default function Write() {
   const [story, setStory] = useState("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [initial, setInitial] = useState<any>("");
+  const titleRef = useRef<HTMLTextAreaElement>(null);
+  const storyRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-resize effect for both fields
+  useEffect(() => {
+    if (titleRef.current) {
+      titleRef.current.style.height = "auto";
+      titleRef.current.style.height = titleRef.current.scrollHeight + "px";
+    }
+  }, [title]);
+
+  useEffect(() => {
+    if (storyRef.current) {
+      storyRef.current.style.height = "auto";
+      storyRef.current.style.height = storyRef.current.scrollHeight + "px";
+    }
+  }, [story]);
 
   async function handleOnclickPublis() {
     try {
@@ -47,6 +64,8 @@ export default function Write() {
             setTitle={setTitle}
             story={story}
             setStory={setStory}
+            titleRef={titleRef}
+            storyRef={storyRef}
           />
         )}
       </div>
@@ -59,18 +78,23 @@ function WriteBox({
   setTitle,
   story,
   setStory,
+  titleRef,
+  storyRef,
 }: {
   title: string;
   setTitle: any;
   story: string;
   setStory: any;
+  titleRef: any;
+  storyRef: any;
 }) {
   return (
     <div className="gap-4 p-6 ">
       <div>
         <div className="text-gray-400">Title</div>
         <textarea
-          className={`text-5xl font-serif w-full outline-none scrollbar-hidden ${title ? "text-black" : "text-gray-400"}`}
+          ref={titleRef}
+          className={`text-5xl font-serif w-full outline-none scrollbar-hidden resize-none overflow-hidden ${title ? "text-black" : "text-gray-400"}`}
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -79,7 +103,8 @@ function WriteBox({
       <div>
         <div className=" text-gray-400">Story</div>
         <textarea
-          className={`mt-2 text-lg w-full outline-none scrollbar-hidden ${story ? "text-black" : "text-gray-400"}`}
+          ref={storyRef}
+          className={`mt-2 text-lg w-full outline-none scrollbar-hidden resize-none overflow-hidden${story ? "text-black" : "text-gray-400"}`}
           placeholder="Tell your story..."
           value={story}
           onChange={(e) => setStory(e.target.value)}
