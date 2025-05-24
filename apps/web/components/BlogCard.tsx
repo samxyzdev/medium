@@ -19,7 +19,7 @@ export const BlogCard = ({
 }: BlogCard) => {
   return (
     <div className="w-[70%]">
-      <div className="border-b pb-6 border-gray-200">
+      <div className="border-b  pb-6 border-gray-200">
         <div className="flex items-center pt-5">
           <ProfileSVG
             className="w-5 h-5 hover:cursor-pointer"

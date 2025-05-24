@@ -86,7 +86,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="pt-10 border-l border-gray-200 pl-10 hidden lg:block">
+          <div className="pt-10 border-l border-gray-200 pl-10 hidden lg:block ">
             <div className="font-bold">Staff Picks</div>
             {data?.top10LatestBlog?.map((blog) => (
               <RightCard
