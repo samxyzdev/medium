@@ -67,7 +67,7 @@ export default function Home() {
     async function backendRequest() {
       try {
         const response = await axios.get<Top10BlogResponse>(
-          "http://localhost:3001/top10blog"
+          "http://localhost:3001/top10blog",
         );
         setData(response.data);
         console.log(response.data);
@@ -92,9 +92,9 @@ export default function Home() {
     <main>
       <NavBar initials={initial} />
       <div className="flex gap-5 md:block">
-        <div className="flex justify-center mx-5">
+        <div className="mx-5 flex justify-center">
           <div>
-            <div className="flex items-center justify-center gap-7 mt-12 border-b border-gray-200 pb-5 md:mt-4">
+            <div className="mt-12 flex items-center justify-center gap-7 border-b border-gray-200 pb-5 md:mt-4">
               <PlusSVG />
               <div className="flex gap-7 whitespace-nowrap">
                 {tabName.map((name) => (
@@ -102,7 +102,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div className="flex items-start sm:justify-center">
+            <div className="">
               {data?.top10LatestBlog?.map((blog) => (
                 <BlogCard
                   key={blog.id}
@@ -114,7 +114,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="pt-10 border-l border-gray-200 pl-10 hidden lg:block ">
+          <div className="hidden border-l border-gray-200 pt-10 pl-10 lg:block">
             <div className="font-bold">Staff Picks</div>
             {data?.top10LatestBlog?.map((blog) => (
               <RightCard

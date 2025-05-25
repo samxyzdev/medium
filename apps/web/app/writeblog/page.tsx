@@ -29,14 +29,15 @@ export default function Write() {
   async function handleOnclickPublis() {
     try {
       const createBlog = await axios.post(
-        "http:localhost:3000/create/blog",
+        "http://localhost:3001/create/blog",
         {
           title: title,
           content: story,
         },
         {
           headers: {
-            Authorization: "",
+            Authorization:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTI4ZDkzZC0yZjFmLTQ2OTUtYmFlYi0xYzhmNzZlMWE1OTIiLCJ1c2VybmFtZSI6Im9zYW1hQGdtYWlsLmNvbSIsImlhdCI6MTc0ODEwMTUxNX0.yq_WxWpm2_E9Gbrdtyz1c9NDJs-oQYmxwyxfAP5486w",
           },
         }
       );
