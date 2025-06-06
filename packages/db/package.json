@@ -1,0 +1,22 @@
+{
+  "name": "@repo/db",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./prisma": "./src/index.ts",
+    "./schema": "./prisma/generated/zod/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prisma": "^6.7.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@prisma/client": "6.7.0",
+    "@repo/typescript-config": "*",
+    "zod-prisma-types": "^3.2.4"
+  }
+}
