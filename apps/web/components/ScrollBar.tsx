@@ -30,26 +30,26 @@ export const ScrollBar = () => {
   };
 
   return (
-    <div className="relative p-4 ">
+    <div className="relative pt-6 pb-3 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl">
       {showPlusSvg ? (
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 p-2 ">
+        <div className="absolute  top-1/2 -translate-y-1/2 pt-4 -left-4 cursor-pointer">
           <PlusSvg />
         </div>
       ) : (
         <button
           onClick={() => scroll("left")}
-          className="absolute left-0 top-1/2 -translate-y-1/2  p-2 bg-gray-50/50"
+          className="absolute left-0 top-1/2 -translate-y-1/2 pt-4   bg-gray-50/50 cursor-pointer"
         >
           <DirectionSvg direction={"Left"} />
         </button>
       )}
       <div
         ref={containerRef}
-        className="flex gap-6 overflow-x-auto whitespace-nowrap no-scrollbar px-5"
+        className="flex gap-8 overflow-x-auto whitespace-nowrap no-scrollbar px-5 "
       >
         {tabs.map((tab, idx) => {
           return (
-            <div className="font-light text-md text-gray-700" key={idx}>
+            <div className="font-light text-sm text-gray-700" key={idx}>
               {tab}
             </div>
           );
@@ -57,8 +57,7 @@ export const ScrollBar = () => {
       </div>
       <button
         onClick={() => scroll("right")}
-        className="absolute right-0 top-1/2 -translate-y-1/2  p-2 bg-gray-50/50
-"
+        className="absolute right-0 top-1/2 -translate-y-1/2  pt-4 bg-gray-50/50 cursor-pointer"
       >
         <DirectionSvg direction={"Right"} />
       </button>

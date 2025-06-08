@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { PlusSVG } from "../Icon/PlusSVG";
 import { jwtDecode } from "jwt-decode";
+import { ScrollBar } from "../../components/ScrollBar";
+import { SkeletonBlogCard } from "../../components/skeleton/SkeletonBlogCard";
 
 // Type for a single blog
 type Blog = {
@@ -14,6 +16,7 @@ type Blog = {
   title: string;
   content: string;
   createdAt: string;
+  image?: string;
   User: {
     username: string;
   };
@@ -24,14 +27,6 @@ type Top10BlogResponse = {
   top10LatestBlog: Blog[];
 };
 
-const tabName = [
-  "For You",
-  "Following",
-  "Feartured",
-  "Technology",
-  "Data Science",
-  "Programming",
-];
 interface MyTokenPayload {
   username: string;
   // include other fields if needed
@@ -61,29 +56,45 @@ const getInitials = () => {
 };
 
 export default function Home() {
-  const [data, setData] = useState<Top10BlogResponse | null>(null);
+  const [data, setData] = useState<Blog[]>([]);
+  const [currentSkip, setCurrentSkip] = useState(0);
   const initial = getInitials();
+
   useEffect(() => {
-    async function backendRequest() {
+    const fetchBlogs = async () => {
       try {
-        const response = await axios.get<Top10BlogResponse>(
-          "http://localhost:3000/top10blog"
+        const response = await axios.get(
+          `http://localhost:3000/blogs/latest?skip=${currentSkip}&take=10`
         );
-        setData(response.data);
         console.log(response.data);
-      } catch (err) {
-        console.error("Failed to fetch blogs", err);
+
+        setData((prev) => [...prev, ...response.data.blogs]);
+      } catch (error) {
+        console.error("Failed to fetch blogs", error);
       }
-    }
+    };
+    fetchBlogs();
+  }, [currentSkip]);
 
-    backendRequest();
-  }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollBottom =
+        window.innerHeight + window.scrollY >= document.body.scrollHeight - 10;
+      if (scrollBottom) {
+        setCurrentSkip((prev) => prev + 10);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
 
-  if (!data) {
+  if (data.length === 0) {
     return (
       <main>
         <NavBar initials={initial} />
-        <div>Loading...</div>
+        {Array.from({ length: 6 }).map((_, index) => {
+          return <SkeletonBlogCard key={index} />;
+        })}
       </main>
     );
   }
@@ -91,34 +102,30 @@ export default function Home() {
   return (
     <main>
       <NavBar initials={initial} />
-      <div className="flex gap-5 md:block">
-        <div className="mx-5 flex justify-center">
+      <div className="flex gap-5  md:block">
+        <div className="mx-5 flex justify-center gap-28 ">
           <div>
-            <div className="mt-12 flex items-center justify-center gap-7 border-b border-gray-200 pb-5 md:mt-4">
-              <PlusSVG />
-              <div className="flex gap-7 whitespace-nowrap">
-                {tabName.map((name) => (
-                  <TabBar key={name} tabName={name} />
-                ))}
-              </div>
+            <div className="flex items-center justify-center border-b border-gray-200">
+              <ScrollBar />
             </div>
             <div className="">
-              {data?.top10LatestBlog?.map((blog) => (
+              {data?.map((blog, id) => (
                 <BlogCard
-                  key={blog.id}
+                  key={id}
                   authorName={blog.User.username}
                   title={blog.title}
                   description={blog.content}
                   initials={blog.User.username.slice(0, 2).toUpperCase()}
+                  image={blog.image || ""}
                 />
               ))}
             </div>
           </div>
-          <div className="hidden border-l border-gray-200 pt-10 pl-10 lg:block">
+          <div className="hidden border-l pl-12  border-gray-200 pt-10 lg:block">
             <div className="font-bold">Staff Picks</div>
-            {data?.top10LatestBlog?.map((blog) => (
+            {data?.map((blog, id) => (
               <RightCard
-                key={blog.id}
+                key={id}
                 authorName={blog.User.username}
                 title={blog.title}
                 initials={blog.User.username.slice(0, 2).toUpperCase()}

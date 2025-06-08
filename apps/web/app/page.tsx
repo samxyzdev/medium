@@ -1,9 +1,9 @@
-import { ScrollBar } from "../components/ScrollBar";
+import Signup from "./signup/page";
 
 export default function Home() {
   return (
     <div>
-      <ScrollBar />
+      <Signup />
     </div>
   );
 }

@@ -149,9 +149,14 @@ app.put("/user/edit/:blog", authMiddleware, async (req, res) => {
   return;
 });
 
-app.get("/top10blog", async (req, res) => {
-  const top10LatestBlog = await prisma.blog.findMany({
-    take: 10,
+app.get("/blogs/latest", async (req, res) => {
+  const take = parseInt(req.query.take as string) || 10;
+  const skip = parseInt(req.query.skip as string) || 0;
+  console.table([take, skip]);
+
+  const blogs = await prisma.blog.findMany({
+    skip,
+    take,
     include: {
       User: {
         select: {
@@ -161,7 +166,7 @@ app.get("/top10blog", async (req, res) => {
     },
   });
   res.json({
-    top10LatestBlog,
+    blogs,
   });
   return;
 });

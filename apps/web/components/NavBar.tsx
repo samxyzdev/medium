@@ -20,10 +20,10 @@ export const NavBar = ({
   const pathName = usePathname();
   return (
     <section
-      className={`flex justify-between p-2 ${className} ml-4 mr-4 items-center`}
+      className={`flex justify-between px-5 py-2 ${className} border-t mt-9 lg:mt-0 items-center max-w-screen`}
     >
       <div className="flex gap-7">
-        <div className="w-32 sm:w-28 hover:cursor-pointer">
+        <div className="w-24 hover:cursor-pointer">
           <Link href={"/dashboard"}>
             <MediumSVG />
           </Link>
@@ -55,18 +55,20 @@ export const NavBar = ({
               </Link>
             )}
           </div>
-          <div className="w-10 sm:hidden hover:cursor-pointer text-gray-500">
+          <div className="w-6 sm:hidden hover:cursor-pointer text-gray-500">
             <SearchSVG />
           </div>
         </div>
-        <div className="w-10 sm:w-8 md:w-7 hover:cursor-pointer">
+        <div className="w-6  hover:cursor-pointer">
           <BellSVG className=" text-gray-500 w-full h-full hover:text-gray-950" />
         </div>
         <div>
           <ProfileSVG
-            className="w-10 h-10 hover:bg-gray-400 hover:cursor-pointer"
+            className="w-8 h-8 hover:bg-gray-400 hover:cursor-pointer"
             textSize="text-md"
             initials={initials}
+            onClick={onclick}
+            enableLogout={true}
           />
         </div>
       </div>

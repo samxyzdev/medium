@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 export default function Signup() {
   const [isOpen, setIsOpen] = useState(false);
   const [showEmailForm, setShowEmailForm] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
+  // const [formSignin, setFromSignin] = useState(false);
 
   return (
     <div className="bg-[#F7F4ED] min-h-screen ">
@@ -25,11 +27,27 @@ export default function Signup() {
           <div className="flex text-nowrap gap-5 text-sm text-gray-950 items-center">
             <div className="hidden md:block">Our Story</div>
             <div className="hidden md:block">Membership</div>
-            <div className="hidden md:block">Write</div>
-            <div className="hidden sm:block">Sign in</div>
+            <div
+              className="hidden md:block cursor-pointer"
+              onClick={() => setIsOpen(true)}
+            >
+              Write
+            </div>
+            <div
+              className="hidden sm:block cursor-pointer"
+              onClick={() => {
+                setShowEmailForm(true);
+                setShowSignup(false);
+              }}
+            >
+              Sign in
+            </div>
             <button
               className="bg-black text-white rounded-3xl p-2 cursor-pointer"
-              onClick={() => setIsOpen(true)}
+              onClick={() => {
+                setIsOpen(true);
+                setShowSignup(true);
+              }}
             >
               Get Started
             </button>
@@ -70,17 +88,22 @@ export default function Signup() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <SignupCard
             onClose={() => setIsOpen(false)}
-            onEmailClick={() => {
+            onEmailClick={(mode: "signin" | "signup") => {
               setIsOpen(false);
               setShowEmailForm(true);
+              setShowSignup(mode === "signup");
             }}
+            showSignup={showSignup}
           />
         </div>
       )}
 
       {/* Email Signup Modal */}
       {showEmailForm && (
-        <SignupWithEmail onClose={() => setShowEmailForm(false)} />
+        <SignupWithEmail
+          onClose={() => setShowEmailForm(false)}
+          showSignup={showSignup}
+        />
       )}
     </div>
   );
@@ -89,9 +112,11 @@ export default function Signup() {
 function SignupCard({
   onClose,
   onEmailClick,
+  showSignup,
 }: {
   onClose: () => void;
-  onEmailClick: () => void;
+  onEmailClick: (mode: "signin" | "signup") => void;
+  showSignup: any;
 }) {
   return (
     <div className="bg-white w-[500px] p-8 rounded-xl shadow-2xl relative">
@@ -107,17 +132,20 @@ function SignupCard({
       <div className="flex flex-col gap-4">
         <button
           className="flex items-center gap-3 border rounded-full py-2 px-6 justify-center hover:bg-gray-100"
-          onClick={onEmailClick}
+          onClick={() => onEmailClick("signup")}
         >
           <MailSVG />
-          Sign up with email
+          {showSignup ? "Sign up with email" : "Sign in with email"}
         </button>
       </div>
       <div className="mt-6 text-center text-sm">
         Already have an account?{" "}
-        <span className="text-green-600 font-semibold cursor-pointer">
+        <button
+          className="text-green-600 font-semibold cursor-pointer"
+          onClick={() => onEmailClick("signin")}
+        >
           Sign in
-        </span>
+        </button>
       </div>
       <p className="text-xs text-center text-gray-500 mt-8 leading-relaxed">
         Click “Sign up” to agree to Medium’s{" "}
@@ -130,13 +158,21 @@ function SignupCard({
   );
 }
 
-function SignupWithEmail({ onClose }: { onClose: () => void }) {
+function SignupWithEmail({
+  onClose,
+  showSignup,
+}: {
+  onClose: () => void;
+  showSignup: any;
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showSpinner, setShowSpinner] = useState(false);
   const router = useRouter();
 
   async function HandleClick() {
     try {
+      setShowSpinner(true);
       const data = await axios.post("http://localhost:3000/signup", {
         username: email,
         password: password,
@@ -163,7 +199,7 @@ function SignupWithEmail({ onClose }: { onClose: () => void }) {
           <MailSVG />
         </div>
         <h2 className="text-xl font-semibold text-center mb-2">
-          Sign up with email
+          {showSignup ? "Sign up with email" : "Sign in with email"}
         </h2>
         <p className="text-center text-gray-600 mb-6">
           Enter your email address to create an account.
@@ -196,7 +232,7 @@ function SignupWithEmail({ onClose }: { onClose: () => void }) {
           className="w-full bg-black text-white py-2 rounded-full font-medium hover:bg-gray-900 transition"
           onClick={HandleClick}
         >
-          Create account
+          {showSpinner ? <Spinner /> : "Create account"}
         </button>
         <div className="mt-6 text-center">
           <button
@@ -248,5 +284,29 @@ function MailSVG() {
         d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
       />
     </svg>
+  );
+}
+
+function Spinner() {
+  return (
+    <div role="status">
+      <svg
+        aria-hidden="true"
+        className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
+        viewBox="0 0 100 101"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+          fill="currentColor"
+        />
+        <path
+          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+          fill="currentFill"
+        />
+      </svg>
+      <span className="sr-only">Loading...</span>
+    </div>
   );
 }
