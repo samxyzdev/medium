@@ -9,89 +9,31 @@ import { PlusSVG } from "../Icon/PlusSVG";
 import { jwtDecode } from "jwt-decode";
 import { ScrollBar } from "../../components/ScrollBar";
 import { SkeletonBlogCard } from "../../components/skeleton/SkeletonBlogCard";
-
-// Type for a single blog
-type Blog = {
-  id: string;
-  title: string;
-  content: string;
-  createdAt: string;
-  image?: string;
-  User: {
-    username: string;
-  };
-};
-
-interface MyTokenPayload {
-  username: string;
-  // include other fields if needed
-}
-
-const getInitials = async () => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-
-  if (!token) return "";
-  try {
-    const decoded = jwtDecode<MyTokenPayload>(token);
-    console.log(decoded);
-
-    const username = decoded.username;
-    const inititals = username ? username[0]?.toUpperCase() : "";
-    console.log(`HELLO HOW ARE YOU ${inititals}`);
-    if (!inititals) {
-      return;
-    }
-    localStorage.setItem("initals", inititals);
-    return inititals;
-  } catch (error) {
-    console.error("Failed to decode token", error);
-    return "";
-  }
-};
+import { extractInitialsFromToken } from "../function/extractinitialfromtoken";
+import { useFetchBlogs } from "../hooks/useFetchBlogs";
+import { skip } from "node:test";
+import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 
 export default function Home() {
-  const [data, setData] = useState<Blog[]>([]);
-  const [currentSkip, setCurrentSkip] = useState(0);
+  const [skip, setSkip] = useState(0);
   const [initial, setInitial] = useState("");
+  const { loading, blogs } = useFetchBlogs(skip);
 
   useEffect(() => {
     const fetchInitials = async () => {
-      const initials = await getInitials();
+      const initials = await extractInitialsFromToken();
       if (initials) setInitial(initials);
     };
     fetchInitials();
-  }, []);
-
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/blogs/latest?skip=${currentSkip}&take=10`
-        );
-        console.log(response.data);
-
-        setData((prev) => [...prev, ...response.data.blogPreview]);
-      } catch (error) {
-        console.error("Failed to fetch blogs", error);
-      }
-    };
-    fetchBlogs();
-  }, [currentSkip]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollBottom =
-        window.innerHeight + window.scrollY >= document.body.scrollHeight - 10;
-      if (scrollBottom) {
-        setCurrentSkip((prev) => prev + 10);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   });
 
-  if (data.length === 0) {
+  useInfiniteScroll(() => {
+    if (!loading) {
+      setSkip((prev) => prev + 10);
+    }
+  });
+
+  if (blogs.length === 0 && loading) {
     return (
       <main>
         <NavBar initials={initial} />
@@ -112,7 +54,7 @@ export default function Home() {
               <ScrollBar />
             </div>
             <div className="">
-              {data?.map((blog, id) => (
+              {blogs.map((blog, id) => (
                 <BlogCard
                   key={id}
                   authorName={blog.User.username}
@@ -126,7 +68,7 @@ export default function Home() {
           </div>
           <div className="hidden border-l pl-12  border-gray-200 pt-10 lg:block">
             <div className="font-bold">Staff Picks</div>
-            {data?.map((blog, id) => (
+            {blogs.map((blog, id) => (
               <RightCard
                 key={id}
                 authorName={blog.User.username}
