@@ -173,16 +173,19 @@ function SignupWithEmail({
   async function HandleClick() {
     try {
       setShowSpinner(true);
-      const data = await axios.post("http://localhost:3000/signup", {
-        username: email,
-        password: password,
-      });
+      const data = await axios.post(
+        `http://localhost:3000/${showSignup ? "signup" : "signin"}`,
+        {
+          username: email,
+          password: password,
+        }
+      );
       if (data) {
         localStorage.setItem("token", data.data.token);
         router.push("/dashboard");
       }
     } catch (e) {
-      alert("there was any eeror creating an sccount");
+      console.log(`Error occured while signup/signin ${e}`);
     }
   }
 
@@ -232,7 +235,7 @@ function SignupWithEmail({
           className="w-full bg-black text-white py-2 rounded-full font-medium hover:bg-gray-900 transition"
           onClick={HandleClick}
         >
-          {showSpinner ? <Spinner /> : "Create account"}
+          {showSpinner ? <Spinner /> : showSignup ? "Create account" : "Login"}
         </button>
         <div className="mt-6 text-center">
           <button

@@ -60,6 +60,8 @@ app.post("/signin", async (req, res) => {
       username: userData.data.username,
     },
   });
+  console.log(isUserExist?.username);
+
   if (!isUserExist) {
     res.json({
       msg: "User doesn't exist",
@@ -77,7 +79,10 @@ app.post("/signin", async (req, res) => {
     return;
   }
   console.log(process.env.JWT_SECRET);
-  const token = jwt.sign({ userId: isUserExist.id }, process.env.JWT_SECRET!);
+  const token = jwt.sign(
+    { userId: isUserExist.id, username: isUserExist.username },
+    process.env.JWT_SECRET!
+  );
   res.json({
     msg: "User created succesfully",
     token: token,
@@ -165,8 +170,12 @@ app.get("/blogs/latest", async (req, res) => {
       },
     },
   });
+  const blogPreview = blogs.map((blog) => ({
+    ...blog,
+    content: blog.content.slice(0, 150),
+  }));
   res.json({
-    blogs,
+    blogPreview,
   });
   return;
 });

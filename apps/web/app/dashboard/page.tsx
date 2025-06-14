@@ -22,25 +22,20 @@ type Blog = {
   };
 };
 
-// API response type
-type Top10BlogResponse = {
-  top10LatestBlog: Blog[];
-};
-
 interface MyTokenPayload {
   username: string;
   // include other fields if needed
 }
 
-const getInitials = () => {
-  const [token, setToken] = useState<string | null>(null);
-  useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    setToken(storedToken);
-  });
+const getInitials = async () => {
+  const token = localStorage.getItem("token");
+  console.log(token);
+
   if (!token) return "";
   try {
     const decoded = jwtDecode<MyTokenPayload>(token);
+    console.log(decoded);
+
     const username = decoded.username;
     const inititals = username ? username[0]?.toUpperCase() : "";
     console.log(`HELLO HOW ARE YOU ${inititals}`);
@@ -58,7 +53,15 @@ const getInitials = () => {
 export default function Home() {
   const [data, setData] = useState<Blog[]>([]);
   const [currentSkip, setCurrentSkip] = useState(0);
-  const initial = getInitials();
+  const [initial, setInitial] = useState("");
+
+  useEffect(() => {
+    const fetchInitials = async () => {
+      const initials = await getInitials();
+      if (initials) setInitial(initials);
+    };
+    fetchInitials();
+  }, []);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -68,7 +71,7 @@ export default function Home() {
         );
         console.log(response.data);
 
-        setData((prev) => [...prev, ...response.data.blogs]);
+        setData((prev) => [...prev, ...response.data.blogPreview]);
       } catch (error) {
         console.error("Failed to fetch blogs", error);
       }
