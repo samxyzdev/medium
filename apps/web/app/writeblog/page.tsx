@@ -30,7 +30,7 @@ export default function Write() {
     const token = localStorage.getItem("token");
     try {
       const createBlog = await axios.post(
-        "http://localhost:3000/create/blog",
+        `${process.env.NEXT_PUBLIC_BASE_URL}/create/blog`,
         {
           title: title,
           content: story,

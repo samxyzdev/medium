@@ -15,6 +15,12 @@ module.exports = {
   },
 };
 
+module.exports = {
+  publicRuntimeConfig: {
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000/",
+  },
+};
+
 export default nextConfig;
 
 // v2/resize:fit:720/format:webp/0*00pyIw1vc-Sg692B.jpg

@@ -199,4 +199,20 @@ app.get(":blogId", async (req, res) => {
   return;
 });
 
+app.get("/search", async (req, res) => {
+  const query = req.query.q;
+  const results = await prisma.blog.findMany({
+    where: {
+      title: {
+        contains: query as string,
+      },
+    },
+    take: 2,
+  });
+  const matchingTitles = results.map((result) => result.title);
+  res.json({
+    matchingTitles,
+  });
+  return;
+});
 app.listen(3000);

@@ -8,15 +8,11 @@ interface MyTokenPayload {
 export const extractInitialsFromToken = async () => {
   const token = localStorage.getItem("token");
   console.log(token);
-
   if (!token) return "";
   try {
     const decoded = jwtDecode<MyTokenPayload>(token);
-    console.log(decoded);
-
     const username = decoded.username;
     const initial = username ? username[0]?.toUpperCase() : "";
-    console.log(`HELLO HOW ARE YOU ${initial}`);
     if (!initial) {
       return;
     }
