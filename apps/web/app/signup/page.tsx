@@ -1,5 +1,4 @@
 "use client";
-import { NavBar } from "../../components/NavBar";
 import Image from "next/image";
 import { MediumSVG } from "../Icon/MediumSVG";
 import flower from "./flower.webp";
@@ -16,26 +15,26 @@ export default function Signup() {
   // const [formSignin, setFromSignin] = useState(false);
 
   return (
-    <div className="bg-[#F7F4ED] min-h-screen ">
+    <div className="min-h-screen bg-[#F7F4ED]">
       {/* Header */}
       <div className="border-b">
-        <div className="mx-auto max-w-7xl flex justify-between items-center p-5 gap-10">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-10 p-5">
           <div className="w-28 shrink-0">
             <Link href="/">
               <MediumSVG />
             </Link>
           </div>
-          <div className="flex text-nowrap gap-5 text-sm text-gray-950 items-center">
+          <div className="flex items-center gap-5 text-sm text-nowrap text-gray-950">
             <div className="hidden md:block">Our Story</div>
             <div className="hidden md:block">Membership</div>
             <div
-              className="hidden md:block cursor-pointer"
+              className="hidden cursor-pointer md:block"
               onClick={() => setIsOpen(true)}
             >
               Write
             </div>
             <div
-              className="hidden sm:block cursor-pointer"
+              className="hidden cursor-pointer sm:block"
               onClick={() => {
                 setShowEmailForm(true);
                 setShowSignup(false);
@@ -44,7 +43,7 @@ export default function Signup() {
               Sign in
             </div>
             <button
-              className="bg-black text-white rounded-3xl p-2 cursor-pointer"
+              className="cursor-pointer rounded-3xl bg-black p-2 text-white"
               onClick={() => {
                 setIsOpen(true);
                 setShowSignup(true);
@@ -57,28 +56,28 @@ export default function Signup() {
       </div>
 
       {/* Hero Section */}
-      <div className="h-[780px] flex justify-between xl:justify-end xl:gap-96">
+      <div className="flex h-[780px] justify-between xl:justify-end xl:gap-96">
         <div className="pt-56">
-          <h1 className="text-7xl mx-5 md:text-8xl font-semibold ">
+          <h1 className="mx-5 text-7xl font-semibold md:text-8xl">
             Human stories <br /> & ideas
           </h1>
-          <p className="text-2xl mx-5 my-10">
+          <p className="mx-5 my-10 text-2xl">
             A place to read, write, and deepen your understanding
           </p>
           <button
-            className=" bg-[#156D12] md:bg-black text-white rounded-3xl px-12 py-3 mx-5"
+            className="mx-5 rounded-3xl bg-[#156D12] px-12 py-3 text-white md:bg-black"
             onClick={() => setIsOpen(true)}
           >
             Start Reading
           </button>
         </div>
-        <div className="hidden lg:block shrink-0 pt-28">
+        <div className="hidden shrink-0 pt-28 lg:block">
           <Image src={flower} alt="flower" height={500} width={500} />
         </div>
       </div>
 
       {/* Footer */}
-      <footer className="h-[70px] text-sm border-t p-5 bg-black md:bg-[#F7F4ED] text-white flex justify-start md:justify-center  md:text-gray-700 gap-4">
+      <footer className="flex h-[70px] justify-start gap-4 border-t bg-black p-5 text-sm text-white md:justify-center md:bg-[#F7F4ED] md:text-gray-700">
         {["Help", "Status", "About", "Careers", ,].map((item) => (
           <div key={item}>{item}</div>
         ))}
@@ -120,19 +119,19 @@ function SignupCard({
   showSignup: any;
 }) {
   return (
-    <div className="bg-white w-[500px] p-8 rounded-xl shadow-2xl relative">
+    <div className="relative w-[500px] rounded-xl bg-white p-8 shadow-2xl">
       <div
-        className="absolute top-4 right-4 text-xl cursor-pointer"
+        className="absolute top-4 right-4 cursor-pointer text-xl"
         onClick={onClose}
       >
         ×
       </div>
-      <h2 className="text-2xl font-serif font-semibold text-center mb-8">
+      <h2 className="mb-8 text-center font-serif text-2xl font-semibold">
         Join Medium.
       </h2>
       <div className="flex flex-col gap-4">
         <button
-          className="flex items-center gap-3 border rounded-full py-2 px-6 justify-center hover:bg-gray-100"
+          className="flex items-center justify-center gap-3 rounded-full border px-6 py-2 hover:bg-gray-100"
           onClick={() => onEmailClick("signup")}
         >
           <MailSVG />
@@ -142,18 +141,18 @@ function SignupCard({
       <div className="mt-6 text-center text-sm">
         Already have an account?{" "}
         <button
-          className="text-green-600 font-semibold cursor-pointer"
+          className="cursor-pointer font-semibold text-green-600"
           onClick={() => onEmailClick("signin")}
         >
           Sign in
         </button>
       </div>
-      <p className="text-xs text-center text-gray-500 mt-8 leading-relaxed">
+      <p className="mt-8 text-center text-xs leading-relaxed text-gray-500">
         Click “Sign up” to agree to Medium’s{" "}
-        <span className="underline cursor-pointer">Terms of Service</span> and
+        <span className="cursor-pointer underline">Terms of Service</span> and
         acknowledge that Medium’s{" "}
-        <span className="underline cursor-pointer ">Privacy Policy</span>{" "}
-        applies to you.
+        <span className="cursor-pointer underline">Privacy Policy</span> applies
+        to you.
       </p>
     </div>
   );
@@ -179,7 +178,7 @@ function SignupWithEmail({
         {
           username: email,
           password: password,
-        }
+        },
       );
       if (data) {
         localStorage.setItem("token", data.data.token);
@@ -191,49 +190,49 @@ function SignupWithEmail({
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
-      <div className="bg-white w-[500px] rounded-xl p-8 relative shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+      <div className="relative w-[500px] rounded-xl bg-white p-8 shadow-2xl">
         <button
-          className="absolute top-4 right-4 text-gray-600 text-2xl hover:text-black"
+          className="absolute top-4 right-4 text-2xl text-gray-600 hover:text-black"
           onClick={onClose}
         >
           ×
         </button>
-        <div className="flex justify-center mb-4">
+        <div className="mb-4 flex justify-center">
           <MailSVG />
         </div>
-        <h2 className="text-xl font-semibold text-center mb-2">
+        <h2 className="mb-2 text-center text-xl font-semibold">
           {showSignup ? "Sign up with email" : "Sign in with email"}
         </h2>
-        <p className="text-center text-gray-600 mb-6">
+        <p className="mb-6 text-center text-gray-600">
           Enter your email address to create an account.
         </p>
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-1" htmlFor="email">
+          <label className="mb-1 block text-sm font-medium" htmlFor="email">
             Your email
           </label>
           <input
             id="email"
             type="email"
             placeholder="Enter your email address"
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label className="block text-sm font-medium mb-1" htmlFor="email">
+          <label className="mb-1 block text-sm font-medium" htmlFor="email">
             Password
           </label>
           <input
             id="email"
             type="email"
             placeholder="Enter your email address"
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <button
-          className="w-full bg-black text-white py-2 rounded-full font-medium hover:bg-gray-900 transition"
+          className="w-full rounded-full bg-black py-2 font-medium text-white transition hover:bg-gray-900"
           onClick={HandleClick}
         >
           {showSpinner ? <Spinner /> : showSignup ? "Create account" : "Login"}
@@ -246,7 +245,7 @@ function SignupWithEmail({
             Back to sign up options
           </button>
         </div>
-        <p className="text-[11px] text-gray-500 text-center mt-6 leading-relaxed">
+        <p className="mt-6 text-center text-[11px] leading-relaxed text-gray-500">
           This site is protected by reCAPTCHA Enterprise and the{" "}
           <a
             href="https://policies.google.com/privacy"

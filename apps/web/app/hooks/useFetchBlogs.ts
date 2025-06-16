@@ -24,7 +24,7 @@ export const useFetchBlogs = (skip: number) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/blogs/latest?skip=${currentSkip}&take=10`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/blogs/blogpreview/latest?skip=${currentSkip}&take=10`,
         );
         const blogs = response.data.blogPreview;
         setBlogs((prev) => [...prev, ...blogs]);

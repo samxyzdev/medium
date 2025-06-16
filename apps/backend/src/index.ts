@@ -154,7 +154,7 @@ app.put("/user/edit/:blog", authMiddleware, async (req, res) => {
   return;
 });
 
-app.get("/blogs/latest", async (req, res) => {
+app.get("/blogs/blogpreview/latest", async (req, res) => {
   const take = parseInt(req.query.take as string) || 10;
   const skip = parseInt(req.query.skip as string) || 0;
   console.table([take, skip]);
@@ -180,7 +180,7 @@ app.get("/blogs/latest", async (req, res) => {
   return;
 });
 
-app.get(":blogId", async (req, res) => {
+app.get("/blog/:blogId", async (req, res) => {
   const blogId = req.params.blogId;
   const blog = await prisma.blog.findFirst({
     where: {
@@ -193,9 +193,7 @@ app.get(":blogId", async (req, res) => {
     });
     return;
   }
-  res.json({
-    blog,
-  });
+  res.json({ title: blog.title, content: blog.content });
   return;
 });
 
@@ -209,7 +207,10 @@ app.get("/search", async (req, res) => {
     },
     take: 2,
   });
-  const matchingTitles = results.map((result) => result.title);
+  const matchingTitles = results.map((result) => ({
+    title: result.title,
+    id: result.id,
+  }));
   res.json({
     matchingTitles,
   });

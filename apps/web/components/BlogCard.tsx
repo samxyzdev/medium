@@ -4,12 +4,14 @@ import { MoreSvg } from "../app/Icon/MoreSVG";
 import { ProfileSVG } from "../app/Icon/ProfileSVG";
 import { ShowLessLikeThisSvg } from "../app/Icon/ShowLessLikeThisSVG";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 interface BlogCard {
   authorName: string;
   title: string;
   description: string;
   initials: string;
   image?: string;
+  blogId: string;
 }
 
 export const BlogCard = ({
@@ -18,9 +20,14 @@ export const BlogCard = ({
   description,
   initials,
   image,
+  blogId,
 }: BlogCard) => {
+  const router = useRouter();
+  function handleClick() {
+    router.push(`/fullblog/${blogId}`);
+  }
   return (
-    <div className="pt-11 flex max-w-xl mx-auto">
+    <div className="mx-auto flex max-w-xl pt-11">
       <div className="">
         <div className="border-b border-gray-200 pb-6">
           <div className="flex items-center">
@@ -32,15 +39,15 @@ export const BlogCard = ({
               <span className="text-gray-500">by</span> {authorName}
             </div>
           </div>
-          <div className="flex justify-between pt-3 gap-3">
-            <div>
+          <div className="flex justify-between gap-3 pt-3">
+            <div className="cursor-pointer" onClick={handleClick}>
               <div className="text-lg font-extrabold md:text-3xl">{title}</div>
-              <div className="pt-2 md:text-lg line-clamp-2 text-gray-500">
+              <div className="line-clamp-2 pt-2 text-gray-500 md:text-lg">
                 {description}
               </div>
             </div>
             {image && (
-              <div className="rounded-lg h-12 px-9 md:h-20 md:px-12 border border-black">
+              <div className="h-12 rounded-lg border border-black px-9 md:h-20 md:px-12">
                 {/* <DuplicateImage /> */}
               </div>
             )}

@@ -17,7 +17,9 @@ export default function Home() {
   useEffect(() => {
     const fetchInitials = async () => {
       const initials = await extractInitialsFromToken();
-      if (initials) setInitial(initials);
+      if (initials) {
+        setInitial(initials);
+      }
     };
     fetchInitials();
   });
@@ -31,7 +33,7 @@ export default function Home() {
   if (blogs.length === 0 && loading) {
     return (
       <main>
-        <NavBar initials={initial} />
+        <NavBar />
         {Array.from({ length: 6 }).map((_, index) => {
           return <SkeletonBlogCard key={index} />;
         })}
@@ -41,7 +43,7 @@ export default function Home() {
 
   return (
     <main>
-      <NavBar initials={initial} />
+      <NavBar />
       <div className="flex gap-5 md:block">
         <div className="mx-5 flex justify-center gap-28">
           <div>
@@ -52,6 +54,7 @@ export default function Home() {
               {blogs.map((blog, id) => (
                 <BlogCard
                   key={id}
+                  blogId={blog.id}
                   authorName={blog.User.username}
                   title={blog.title}
                   description={blog.content}

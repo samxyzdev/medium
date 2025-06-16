@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { BellSVG } from "../app/Icon/BellSVG";
 import { MediumSVG } from "../app/Icon/MediumSVG";
@@ -10,17 +11,15 @@ import { usePathname } from "next/navigation";
 
 export const NavBar = ({
   onclick,
-  initials,
   className = "border-b border-gray-200",
 }: {
   onclick?: () => void;
-  initials?: string;
   className?: string;
 }) => {
   const pathName = usePathname();
   return (
     <section
-      className={`flex justify-between px-5 py-2 ${className} border-t mt-9 lg:mt-0 items-center max-w-screen`}
+      className={`flex justify-between px-5 py-2 ${className} mt-9 max-w-screen items-center border-t lg:mt-0`}
     >
       <div className="flex gap-7">
         <div className="w-24 hover:cursor-pointer">
@@ -29,44 +28,43 @@ export const NavBar = ({
           </Link>
         </div>
         <div className="">
-          <div className="hidden  sm:block">
+          <div className="hidden sm:block">
             <SearchBar />
           </div>
         </div>
       </div>
-      <div className="flex gap-8 items-center">
+      <div className="flex items-center gap-8">
         <div className="flex gap-2">
-          <div className="hidden md:block ">
+          <div className="hidden md:block">
             {pathName === "/writeblog" ? (
               <button
                 onClick={onclick}
-                className={`bg-green-700 rounded-xl text-white h-7 w-20  hover:bg-green-900 hover:cursor-pointer`}
+                className={`h-7 w-20 rounded-xl bg-green-700 text-white hover:cursor-pointer hover:bg-green-900`}
               >
                 Publish
               </button>
             ) : (
               <Link href={"/writeblog"}>
-                <div className="flex gap-1 hover:cursor-pointer group items-center">
+                <div className="group flex items-center gap-1 hover:cursor-pointer">
                   <WriteSVG className="text-gray-600 group-hover:text-gray-950" />
-                  <div className="text-gray-600 group-hover:text-gray-950 text-sm">
+                  <div className="text-sm text-gray-600 group-hover:text-gray-950">
                     Write
                   </div>
                 </div>
               </Link>
             )}
           </div>
-          <div className="w-6 sm:hidden hover:cursor-pointer text-gray-500">
+          <div className="w-6 text-gray-500 hover:cursor-pointer sm:hidden">
             <SearchSVG />
           </div>
         </div>
-        <div className="w-6  hover:cursor-pointer">
-          <BellSVG className=" text-gray-500 w-full h-full hover:text-gray-950" />
+        <div className="w-6 hover:cursor-pointer">
+          <BellSVG className="h-full w-full text-gray-500 hover:text-gray-950" />
         </div>
         <div>
           <ProfileSVG
-            className="w-8 h-8 hover:bg-gray-400 hover:cursor-pointer"
+            className="h-8 w-8 hover:cursor-pointer hover:bg-gray-400"
             textSize="text-md"
-            initials={initials}
             onClick={onclick}
             enableLogout={true}
           />

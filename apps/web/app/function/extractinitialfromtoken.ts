@@ -1,8 +1,9 @@
+"use client";
+
 import { jwtDecode } from "jwt-decode";
 
 interface MyTokenPayload {
   username: string;
-  // include other fields if needed
 }
 
 export const extractInitialsFromToken = async () => {
