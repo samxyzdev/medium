@@ -1,5 +1,6 @@
 import axios from "axios";
 import { NavBar } from "../../../components/NavBar";
+// import DOMPurify from "dompurify";
 
 export default async function FullBlog({
   params,
@@ -19,10 +20,13 @@ export default async function FullBlog({
         <h1 className="text-4xl font-bold capitalize">{response.data.title}</h1>
         <p className="pt-3 text-sm font-normal">May 2025</p>
         <p
-          className="pt-10 text-2xl text-gray-800"
+          className="prose max-w-none pt-10 text-2xl text-gray-800"
           style={{ wordSpacing: "3px" }}
+          dangerouslySetInnerHTML={{
+            __html: response.data.content,
+          }}
         >
-          {response.data.content}
+          {/* {response.data.content} */}
         </p>
       </section>
     </div>
