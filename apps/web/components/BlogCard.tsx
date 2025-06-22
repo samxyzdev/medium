@@ -1,9 +1,9 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { BookMarkSvg } from "../app/Icon/BookMarkSVG";
 import { MoreSvg } from "../app/Icon/MoreSVG";
 import { ProfileSVG } from "../app/Icon/ProfileSVG";
 import { ShowLessLikeThisSvg } from "../app/Icon/ShowLessLikeThisSVG";
-import Image from "next/image";
+// import Image from "next/image";
 import { useRouter } from "next/navigation";
 interface BlogCard {
   authorName: string;
@@ -18,7 +18,6 @@ export const BlogCard = ({
   authorName,
   title,
   description,
-  initials,
   image,
   blogId,
 }: BlogCard) => {
@@ -31,10 +30,7 @@ export const BlogCard = ({
       <div className="">
         <div className="border-b border-gray-200 pb-6">
           <div className="flex items-center">
-            <ProfileSVG
-              className="h-5 w-5 hover:cursor-pointer"
-              initials={initials}
-            />
+            <ProfileSVG className="h-5 w-5 hover:cursor-pointer" />
             <div className="pl-1 text-sm md:text-lg">
               <span className="text-gray-500">by</span> {authorName}
             </div>
@@ -91,13 +87,13 @@ export const BlogCard = ({
 //   );
 // }
 
-function DuplicateImage() {
-  return (
-    <Image
-      src="https://miro.medium.com/v2/resize:fit:720/format:webp/0*00pyIw1vc-Sg692B.jpg"
-      alt="Image"
-      width={900}
-      height={10}
-    />
-  );
-}
+// function DuplicateImage() {
+//   return (
+//     <Image
+//       src="https://miro.medium.com/v2/resize:fit:720/format:webp/0*00pyIw1vc-Sg692B.jpg"
+//       alt="Image"
+//       width={900}
+//       height={10}
+//     />
+//   );
+// }

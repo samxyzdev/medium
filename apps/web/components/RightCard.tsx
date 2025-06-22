@@ -7,24 +7,21 @@ interface RightCard {
   initials: string;
 }
 
-export const RightCard = ({ authorName, title, initials }: RightCard) => {
+export const RightCard = ({ authorName, title }: RightCard) => {
   return (
     <div className="w-80">
-      <div className="flex pt-4 items-center gap-1">
+      <div className="flex items-center gap-1 pt-4">
         <div>
-          <ProfileSVG
-            className="w-5 h-5 hover:cursor-pointer"
-            initials={initials}
-          />
+          <ProfileSVG className="h-5 w-5 hover:cursor-pointer" />
         </div>
-        <div className="text-slate-700 text-sm">{authorName}</div>
+        <div className="text-sm text-slate-700">{authorName}</div>
       </div>
-      <div className="font-extrabold pt-2 text-md">{title}</div>
-      <div className="flex pt-3 items-center gap-4">
+      <div className="text-md pt-2 font-extrabold">{title}</div>
+      <div className="flex items-center gap-4 pt-3">
         <div>
           <StarSVG />
         </div>
-        <div className="text-slate-400 text-sm">4d ago</div>
+        <div className="text-sm text-slate-400">4d ago</div>
       </div>
     </div>
   );

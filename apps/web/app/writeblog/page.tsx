@@ -1,31 +1,42 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+export const dynamic = "force-dynamic";
+
+import {
+  Dispatch,
+  Ref,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { NavBar } from "../../components/NavBar";
 import axios from "axios";
-import Quill from "quill";
 import "quill/dist/quill.snow.css";
 
 export default function Write() {
   const [title, setTitle] = useState("");
-  // const [story, setStory] = useState("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-  const [initial, setInitial] = useState<any>("");
   const titleRef = useRef<HTMLTextAreaElement>(null);
-  // const storyRef = useRef<HTMLTextAreaElement>(null);
-  const quillRef = useRef(null);
-  const quillInstance = useRef<any>(null);
+  const quillRef = useRef<HTMLDivElement>(null);
+  const quillInstance = useRef<any>(null); // avoid typing Quill directly here
 
   useEffect(() => {
-    if (quillRef.current && !quillInstance.current) {
-      quillInstance.current = new Quill(quillRef.current, {
-        modules: { toolbar: true },
-        theme: "snow",
-        placeholder: "Write Your Story",
-      });
-    }
-  });
+    const initQuill = async () => {
+      if (typeof window === "undefined") return;
+      const Quill = (await import("quill")).default;
 
-  // Auto-resize effect for both fields
+      if (quillRef.current && !quillInstance.current) {
+        quillInstance.current = new Quill(quillRef.current, {
+          modules: { toolbar: true },
+          theme: "snow",
+          placeholder: "Write Your Story",
+        });
+      }
+    };
+
+    initQuill();
+  }, []);
+
   useEffect(() => {
     if (titleRef.current) {
       titleRef.current.style.height = "auto";
@@ -33,15 +44,13 @@ export default function Write() {
     }
   }, [title]);
 
-  // useEffect(() => {
-  //   if (storyRef.current) {
-  //     storyRef.current.style.height = "auto";
-  //     storyRef.current.style.height = storyRef.current.scrollHeight + "px";
-  //   }
-  // }, [story]);
-
   async function handleOnclickPublis() {
     const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please login first");
+      return;
+    }
 
     const storyHtml = quillInstance.current?.root.innerHTML;
 
@@ -62,29 +71,24 @@ export default function Write() {
       console.log("Blog created:", createBlog.data);
     } catch (e) {
       console.error("Error creating blog:", e);
-      alert("Something went wrong while publishings");
+      alert("Something went wrong while publishing");
     }
   }
-  useEffect(() => {
-    setInitial(localStorage.getItem("initals"));
-  });
+
   return (
-    <div className="">
-      <NavBar onclick={handleOnclickPublis} initials={initial} />
+    <div>
+      <NavBar onclick={handleOnclickPublis} />
       <div className="flex justify-center">
         {isSubmitted ? (
           <div className="rounded-md bg-neutral-100 p-10 text-gray-500">
-            Blog Created Susscefflyy
+            Blog Created Successfully
           </div>
         ) : (
           <WriteBox
             quillRef={quillRef}
             title={title}
             setTitle={setTitle}
-            // story={story}
-            // setStory={setStory}
             titleRef={titleRef}
-            // storyRef={storyRef}
           />
         )}
       </div>
@@ -95,22 +99,16 @@ export default function Write() {
 function WriteBox({
   title,
   setTitle,
-  // story,
-  // setStory,
   titleRef,
-  // storyRef,
   quillRef,
 }: {
   title: string;
-  setTitle: any;
-  // story: string;
-  // setStory: any;
-  titleRef: any;
-  // storyRef: any;
-  quillRef: any;
+  setTitle: Dispatch<SetStateAction<string>>;
+  titleRef: Ref<HTMLTextAreaElement>;
+  quillRef: Ref<HTMLDivElement>;
 }) {
   return (
-    <div className="gap-4 p-6">
+    <div className="w-full max-w-3xl gap-4 p-6">
       <div>
         <div className="text-gray-400">Title</div>
         <textarea
@@ -119,17 +117,13 @@ function WriteBox({
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-        ></textarea>
+        />
       </div>
-      <div>
+      <div className="mt-6">
         <div className="text-gray-400">Story</div>
         <div
           ref={quillRef}
-          className="min-h-[300px]"
-          // className={`scrollbar-hidden mt-2 w-full resize-none text-lg outline-none overflow-hidden${story ? "text-black" : "text-gray-400"}`}
-          // placeholder="Tell your story..."
-          // value={story}
-          // onChange={(e) => setStory(e.target.value)}
+          className="min-h-[300px] rounded border border-gray-300 bg-white p-4"
         />
       </div>
     </div>

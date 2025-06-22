@@ -2,13 +2,13 @@ import axios from "axios";
 import { NavBar } from "../../../components/NavBar";
 // import DOMPurify from "dompurify";
 
-export default async function FullBlog({
-  params,
-}: {
-  params: {
+interface Props {
+  params: Promise<{
     blogId: string;
-  };
-}) {
+  }>;
+}
+
+export default async function FullBlog({ params }: Props) {
   const { blogId } = await params;
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${blogId}`,

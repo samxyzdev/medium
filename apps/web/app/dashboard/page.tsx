@@ -2,27 +2,27 @@
 import { BlogCard } from "../../components/BlogCard";
 import { RightCard } from "../../components/RightCard";
 import { NavBar } from "../../components/NavBar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ScrollBar } from "../../components/ScrollBar";
 import { SkeletonBlogCard } from "../../components/skeleton/SkeletonBlogCard";
-import { extractInitialsFromToken } from "../function/extractinitialfromtoken";
+// import { extractInitialsFromToken } from "../function/extractinitialfromtoken";
 import { useFetchBlogs } from "../hooks/useFetchBlogs";
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 
 export default function Home() {
   const [skip, setSkip] = useState(0);
-  const [initial, setInitial] = useState("");
+  // const [initial, setInitial] = useState("");
   const { loading, blogs } = useFetchBlogs(skip);
 
-  useEffect(() => {
-    const fetchInitials = async () => {
-      const initials = await extractInitialsFromToken();
-      if (initials) {
-        setInitial(initials);
-      }
-    };
-    fetchInitials();
-  });
+  // useEffect(() => {
+  //   const fetchInitials = async () => {
+  //     const initials = await extractInitialsFromToken();
+  //     if (initials) {
+  //       setInitial(initials);
+  //     }
+  //   };
+  //   fetchInitials();
+  // });
 
   useInfiniteScroll(() => {
     if (!loading) {

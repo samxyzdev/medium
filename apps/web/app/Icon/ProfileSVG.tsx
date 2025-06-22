@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { extractInitialsFromToken } from "../function/extractinitialfromtoken";
+import { StringPromise } from "../types/types";
 
 export const ProfileSVG = ({
   className,
@@ -15,7 +16,7 @@ export const ProfileSVG = ({
 }) => {
   const [showLogout, setShowLogout] = useState(false);
   const router = useRouter();
-  const [initials, setInitials] = useState<any>("");
+  const [initials, setInitials] = useState<StringPromise>();
   useEffect(() => {
     const initials = extractInitialsFromToken();
     setInitials(initials);

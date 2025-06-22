@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import { NavBar } from "../components/NavBar";
+// import { NavBar } from "../components/NavBar";
 
 const geist = Geist({ subsets: ["latin"] });
 

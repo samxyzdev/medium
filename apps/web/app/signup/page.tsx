@@ -78,7 +78,7 @@ export default function Signup() {
 
       {/* Footer */}
       <footer className="flex h-[70px] justify-start gap-4 border-t bg-black p-5 text-sm text-white md:justify-center md:bg-[#F7F4ED] md:text-gray-700">
-        {["Help", "Status", "About", "Careers", ,].map((item) => (
+        {["Help", "Status", "About", "Careers"].map((item) => (
           <div key={item}>{item}</div>
         ))}
       </footer>
@@ -116,7 +116,7 @@ function SignupCard({
 }: {
   onClose: () => void;
   onEmailClick: (mode: "signin" | "signup") => void;
-  showSignup: any;
+  showSignup: boolean;
 }) {
   return (
     <div className="relative w-[500px] rounded-xl bg-white p-8 shadow-2xl">
@@ -163,7 +163,7 @@ function SignupWithEmail({
   showSignup,
 }: {
   onClose: () => void;
-  showSignup: any;
+  showSignup: boolean;
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

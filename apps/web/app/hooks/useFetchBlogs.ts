@@ -15,7 +15,6 @@ type Blog = {
 
 export const useFetchBlogs = (skip: number) => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [currentSkip, setCurrentSkip] = useState(0);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -24,7 +23,7 @@ export const useFetchBlogs = (skip: number) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/blogs/blogpreview/latest?skip=${currentSkip}&take=10`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/blogs/blogpreview/latest?skip=${skip}&take=10`,
         );
         const blogs = response.data.blogPreview;
         setBlogs((prev) => [...prev, ...blogs]);
@@ -35,6 +34,6 @@ export const useFetchBlogs = (skip: number) => {
       }
     };
     fetchBlogs();
-  }, [skip]);
+  });
   return { blogs, loading };
 };
